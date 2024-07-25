@@ -1,0 +1,41 @@
+=====
+copy#
+=====
+
+(rule
+ (targets setup.ml)
+ (mode fallback)
+ (action
+  (copy# setup.defaults.ml setup.ml)))
+
+---
+
+(source_file
+  (sexp
+    (list
+      (sexp
+        (atom))
+      (sexp
+        (list
+          (sexp
+            (atom))
+          (sexp
+            (atom))))
+      (sexp
+        (list
+          (sexp
+            (atom))
+          (sexp
+            (atom))))
+      (sexp
+        (list
+          (sexp
+            (atom))
+          (sexp
+            (list
+              (sexp
+                (atom))
+              (sexp
+                (atom))
+              (sexp
+                (atom)))))))))
