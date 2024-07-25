@@ -24,14 +24,11 @@ copy#
       (atom))
     (field_name)
     (action
+      (action_name)
       (sexp
-        (list
-          (sexp
-            (atom))
-          (sexp
-            (atom))
-          (sexp
-            (atom)))))))
+        (atom))
+      (sexp
+        (atom)))))
 
 ======
 system
@@ -55,12 +52,9 @@ system
           (atom))))
     (field_name)
     (action
+      (action_name)
       (sexp
-        (list
-          (sexp
-            (atom))
-          (sexp
-            (quoted_string)))))))
+        (quoted_string)))))
 
 ====
 bash
@@ -95,12 +89,9 @@ bash
             (atom)))))
     (field_name)
     (action
+      (action_name)
       (sexp
-        (list
-          (sexp
-            (atom))
-          (sexp
-            (quoted_string)))))))
+        (quoted_string)))))
 
 ==============
 with-stdout-to
@@ -158,6 +149,9 @@ progn
           (atom))))
     (field_name)
     (action
+      (action_name)
+      (sexp
+        (atom))
       (sexp
         (list
           (sexp
@@ -169,20 +163,14 @@ progn
               (sexp
                 (atom))
               (sexp
-                (atom))
+                (list
+                  (sexp
+                    (atom))
+                  (sexp
+                    (quoted_string))))
               (sexp
                 (list
                   (sexp
                     (atom))
                   (sexp
-                    (list
-                      (sexp
-                        (atom))
-                      (sexp
-                        (quoted_string))))
-                  (sexp
-                    (list
-                      (sexp
-                        (atom))
-                      (sexp
-                        (quoted_string)))))))))))))
+                    (quoted_string)))))))))))

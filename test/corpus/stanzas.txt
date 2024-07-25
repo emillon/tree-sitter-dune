@@ -111,6 +111,9 @@ Rule
             (atom)))))
     (field_name)
     (action
+      (action_name)
+      (sexp
+        (atom))
       (sexp
         (list
           (sexp
@@ -118,21 +121,15 @@ Rule
           (sexp
             (atom))
           (sexp
+            (quoted_string))
+          (sexp
             (list
               (sexp
                 (atom))
               (sexp
                 (atom))
               (sexp
-                (quoted_string))
-              (sexp
-                (list
-                  (sexp
-                    (atom))
-                  (sexp
-                    (atom))
-                  (sexp
-                    (atom))))))))))
+                (atom))))))))
   (stanza
     (stanza_name)
     (field_name)
@@ -142,10 +139,11 @@ Rule
     (atom)
     (field_name)
     (action
+      (action_name)
+      (sexp
+        (atom))
       (sexp
         (list
-          (sexp
-            (atom))
           (sexp
             (atom))
           (sexp
@@ -153,41 +151,37 @@ Rule
               (sexp
                 (atom))
               (sexp
-                (list
-                  (sexp
-                    (atom))
-                  (sexp
-                    (quoted_string))))
+                (quoted_string))))
+          (sexp
+            (list
               (sexp
-                (list
-                  (sexp
-                    (atom))
-                  (sexp
-                    (atom))))
+                (atom))
               (sexp
-                (list
-                  (sexp
-                    (atom))
-                  (sexp
-                    (quoted_string))))
+                (atom))))
+          (sexp
+            (list
               (sexp
-                (list
-                  (sexp
-                    (atom))
-                  (sexp
-                    (quoted_string))))
+                (atom))
               (sexp
-                (list
-                  (sexp
-                    (atom))
-                  (sexp
-                    (atom))))
+                (quoted_string))))
+          (sexp
+            (list
               (sexp
-                (list
-                  (sexp
-                    (atom))
-                  (sexp
-                    (quoted_string))))))))))
+                (atom))
+              (sexp
+                (quoted_string))))
+          (sexp
+            (list
+              (sexp
+                (atom))
+              (sexp
+                (atom))))
+          (sexp
+            (list
+              (sexp
+                (atom))
+              (sexp
+                (quoted_string))))))))
   (stanza
     (stanza_name)
     (sexp
@@ -204,22 +198,19 @@ Rule
         (atom)))
     (field_name)
     (action
+      (action_name)
       (sexp
-        (list
-          (sexp
-            (atom))
-          (sexp
-            (atom))
-          (sexp
-            (atom))
-          (sexp
-            (atom))
-          (sexp
-            (atom))
-          (sexp
-            (atom))
-          (sexp
-            (atom)))))))
+        (atom))
+      (sexp
+        (atom))
+      (sexp
+        (atom))
+      (sexp
+        (atom))
+      (sexp
+        (atom))
+      (sexp
+        (atom)))))
 
 =======
 library
@@ -232,6 +223,11 @@ library
  (synopsis "Internal Dune library, do not use!")
  (instrumentation
   (backend bisect_ppx)))
+
+(library
+ (name bar)
+ (libraries impl1)
+ (modules))
 
 ---
 
@@ -259,7 +255,16 @@ library
         (sexp
           (atom))
         (sexp
-          (atom))))))
+          (atom)))))
+  (stanza
+    (stanza_name)
+    (field_name)
+    (module_name
+      (atom))
+    (field_name)
+    (library_name
+      (atom))
+    (field_name)))
 
 ==========
 enabled_if
@@ -304,18 +309,15 @@ enabled_if
               (quoted_string))))))
     (field_name)
     (action
+      (action_name)
+      (sexp
+        (atom))
       (sexp
         (list
           (sexp
             (atom))
           (sexp
-            (atom))
-          (sexp
-            (list
-              (sexp
-                (atom))
-              (sexp
-                (quoted_string))))))))
+            (quoted_string))))))
   (stanza
     (stanza_name)
     (field_name)
@@ -334,18 +336,15 @@ enabled_if
               (quoted_string))))))
     (field_name)
     (action
+      (action_name)
+      (sexp
+        (atom))
       (sexp
         (list
           (sexp
             (atom))
           (sexp
-            (atom))
-          (sexp
-            (list
-              (sexp
-                (atom))
-              (sexp
-                (quoted_string)))))))))
+            (quoted_string)))))))
 
 =========
 re_export

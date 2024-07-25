@@ -3,11 +3,15 @@
 
 const dune_stanza = ($, name, field_parser) =>
   seq("(", alias(name, $.stanza_name), repeat(field_parser), ")");
+
 const dune_field = ($, name, value) =>
   seq("(", alias(name, $.field_name), value, ")");
 
 const dune_osl = (element, self) =>
   choice(repeat1(element), seq("(", optional(self), ")"));
+
+const dune_action = ($, name) =>
+  seq("(", alias(name, $.action_name), repeat($.sexp), ")");
 
 const PREC = { COMMENT: 0, STRING: 1 };
 
@@ -42,7 +46,7 @@ module.exports = grammar({
         dune_field($, "name", $.module_name),
         dune_field($, "public_name", $.public_name),
         dune_field($, "libraries", repeat($._lib_dep)),
-        dune_field($, "modules", $._modules_osl),
+        dune_field($, "modules", optional($._modules_osl)),
       ),
     _modules_osl: ($) => dune_osl($.module_name, $._modules_osl),
     _lib_dep: ($) =>
@@ -67,7 +71,23 @@ module.exports = grammar({
         ),
       ),
     field_name: ($) => $._atom_or_qs,
-    action: ($) => $.sexp,
+    action: ($) =>
+      choice(
+        dune_action($, "bash"),
+        dune_action($, "cat"),
+        dune_action($, "chdir"),
+        dune_action($, "copy"),
+        dune_action($, "copy#"),
+        dune_action($, "diff"),
+        dune_action($, "echo"),
+        dune_action($, "no-infer"),
+        dune_action($, "progn"),
+        dune_action($, "run"),
+        dune_action($, "system"),
+        dune_action($, "with-outputs-to"),
+        dune_action($, "with-stdout-to"),
+        dune_action($, "write-file"),
+      ),
     _stanza_library: ($) =>
       dune_stanza(
         $,
