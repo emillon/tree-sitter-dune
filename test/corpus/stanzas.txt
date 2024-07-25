@@ -225,7 +225,7 @@ Rule
             (atom)))))))
 
 =======
-Library
+library
 =======
 
 (library
@@ -399,3 +399,55 @@ vendored_dirs
           (atom))
         (sexp
           (atom))))))
+
+======
+select
+======
+
+(executable
+ (name main)
+ (modules a main)
+ (libraries
+  (select
+   a.ml
+   from
+   (a -> a.pre_413.ml)
+   (-> a.unix.ml))))
+
+---
+
+(source_file
+  (stanza
+    (stanza_name)
+    (field_name)
+    (module_name
+      (atom))
+    (sexp
+      (list
+        (sexp
+          (atom))
+        (sexp
+          (atom))
+        (sexp
+          (atom))))
+    (field_name)
+    (field_name)
+    (sexps1
+      (sexp
+        (atom))
+      (sexp
+        (atom))
+      (sexp
+        (list
+          (sexp
+            (atom))
+          (sexp
+            (atom))
+          (sexp
+            (atom))))
+      (sexp
+        (list
+          (sexp
+            (atom))
+          (sexp
+            (atom)))))))

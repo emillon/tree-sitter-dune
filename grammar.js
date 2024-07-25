@@ -19,7 +19,7 @@ module.exports = grammar({
     sexps1: ($) => repeat1($.sexp),
     _atom_or_qs: ($) => choice($.atom, $.quoted_string, $.multiline_string),
     quoted_string: ($) => seq('"', repeat($._quoted_string_char), '"'),
-    multiline_string: ($) => seq('"\\|', /.*/, "\n"),
+    multiline_string: ($) => /"\\[\|>].*\n/,
     _quoted_string_char: ($) =>
       token.immediate(
         prec(
@@ -41,7 +41,11 @@ module.exports = grammar({
         dune_field($, "libraries", repeat($._lib_dep)),
       ),
     _lib_dep: ($) =>
-      choice($.library_name, dune_field($, "re_export", $.library_name)),
+      choice(
+        $.library_name,
+        dune_field($, "re_export", $.library_name),
+        dune_field($, "select", $.sexps1),
+      ),
     library_name: ($) => alias($._atom_or_qs, "library_name"),
     public_name: ($) => alias($._atom_or_qs, "public_name"),
     module_name: ($) => alias($._atom_or_qs, "module_name"),
