@@ -6,35 +6,50 @@ const dune_stanza = ($, name, field_parser) =>
 const dune_field = ($, name, value) =>
   seq("(", alias(name, $.field_name), value, ")");
 
+const PREC = { COMMENT: 0, STRING: 1 };
+
 module.exports = grammar({
   name: "dune",
 
-  extras: ($) => [/\s+/, $.comment],
+  extras: ($) => [$.comment, /\s+/],
 
   rules: {
     source_file: ($) => repeat($.stanza),
     sexp: ($) => choice($._atom_or_qs, $.list),
-    _atom_or_qs: ($) => choice($.atom, $.quoted_string),
+    sexps1: ($) => repeat1($.sexp),
+    _atom_or_qs: ($) => choice($.atom, $.quoted_string, $.multiline_string),
     quoted_string: ($) => seq('"', repeat($._quoted_string_char), '"'),
+    multiline_string: ($) => seq('"\\|', /.*/, "\n"),
     _quoted_string_char: ($) =>
-      choice(
-        /[a-z]/,
-        /[A-Z]/,
-        /[,!%{}()_=]/,
-        "-",
-        "|",
-        "/",
-        ".",
-        "\\n",
-        " ",
-        /[0-9]/,
+      token.immediate(
+        prec(
+          PREC.STRING,
+          choice(
+            /[a-z]/,
+            /[A-Z]/,
+            /[:';,!%{}()<>_=]/,
+            "-",
+            "+",
+            "*",
+            "$",
+            "|",
+            "/",
+            ".",
+            "\n",
+            "&",
+            seq("\\", choice("n", "\n", "r", '"', "\\")),
+            " ",
+            /[0-9]/,
+          ),
+        ),
       ),
-    atom: ($) => /[a-zA-Z0-9_%.:/{}|=\\,\-!#<>]+/,
+    atom: ($) => /[a-zA-Z0-9_%.:/{}|=\\,\-!#<>*+]+/,
     list: ($) => seq("(", repeat($.sexp), ")"),
-    comment: ($) => /;.*/,
+    comment: ($) => token(prec(PREC.COMMENT, /;.*/)),
     stanza: ($) =>
       choice($._stanza_executable, $._stanza_rule, $._stanza_library, $.sexp),
-    _stanza_executable: ($) => dune_stanza($, "executable", $._field_buildable),
+    _stanza_executable: ($) =>
+      dune_stanza($, "executable", choice($._field_buildable, $.sexp)),
     _field_buildable: ($) =>
       choice(
         dune_field($, "name", $.module_name),
@@ -53,7 +68,7 @@ module.exports = grammar({
         choice(
           dune_field($, "mode", $.sexp),
           dune_field($, "target", $._atom_or_qs),
-          dune_field($, "deps", $.sexp),
+          dune_field($, "deps", $.sexps1),
           dune_field($, "action", $.action),
           $.sexp,
         ),

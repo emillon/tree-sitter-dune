@@ -32,3 +32,157 @@ copy#
             (atom))
           (sexp
             (atom)))))))
+
+======
+system
+======
+
+(rule
+ (alias sleep1-and-fail)
+ (action
+  (system "sleep 1; exit 1")))
+
+---
+
+(source_file
+  (stanza
+    (stanza_name)
+    (sexp
+      (list
+        (sexp
+          (atom))
+        (sexp
+          (atom))))
+    (field_name)
+    (action
+      (sexp
+        (list
+          (sexp
+            (atom))
+          (sexp
+            (quoted_string)))))))
+
+====
+bash
+====
+
+(rule
+ (alias locks)
+ (deps
+  (glob_files *.{foo,bar}))
+ (action
+  (bash
+   "echo 'expected result: 10'\necho 'without locking:' $(< x)\necho 'with locking:   ' $(< y)\nrm -f *.{foo,bar} x y")))
+
+------
+
+(source_file
+  (stanza
+    (stanza_name)
+    (sexp
+      (list
+        (sexp
+          (atom))
+        (sexp
+          (atom))))
+    (field_name)
+    (sexps1
+      (sexp
+        (list
+          (sexp
+            (atom))
+          (sexp
+            (atom)))))
+    (field_name)
+    (action
+      (sexp
+        (list
+          (sexp
+            (atom))
+          (sexp
+            (quoted_string)))))))
+
+==============
+with-stdout-to
+==============
+
+(rule
+ (with-stdout-to
+  incr.ml
+  (echo
+   "let fn = Sys.argv.(1) in\nlet x =\n  match open_in fn with\n  | ic ->\n    let x = int_of_string (input_line ic) in\n    close_in ic;\n    x\n  | exception _ -> 0\nin\nUnix.sleepf 0.2;\nPrintf.fprintf (open_out fn) \"%d\\n\" (x + 1);\nPrintf.fprintf (open_out Sys.argv.(2)) \"%g\n%!\" (Sys.time ())\n")))
+
+
+---
+
+(source_file
+  (stanza
+    (stanza_name)
+    (sexp
+      (list
+        (sexp
+          (atom))
+        (sexp
+          (atom))
+        (sexp
+          (list
+            (sexp
+              (atom))
+            (sexp
+              (quoted_string))))))))
+
+=====
+progn
+=====
+
+(rule
+ (targets stdout stderr)
+ (action  (with-stdout-to stdout
+           (with-stderr-to stderr
+            (progn
+             (system "echo toto")
+             (system "echo titi >&2"))))))
+
+---
+
+(source_file
+  (stanza
+    (stanza_name)
+    (sexp
+      (list
+        (sexp
+          (atom))
+        (sexp
+          (atom))
+        (sexp
+          (atom))))
+    (field_name)
+    (action
+      (sexp
+        (list
+          (sexp
+            (atom))
+          (sexp
+            (atom))
+          (sexp
+            (list
+              (sexp
+                (atom))
+              (sexp
+                (atom))
+              (sexp
+                (list
+                  (sexp
+                    (atom))
+                  (sexp
+                    (list
+                      (sexp
+                        (atom))
+                      (sexp
+                        (quoted_string))))
+                  (sexp
+                    (list
+                      (sexp
+                        (atom))
+                      (sexp
+                        (quoted_string)))))))))))))

@@ -7,6 +7,11 @@ Executable
  (public_name p)
  (libraries a b c))
 
+(executable
+ (name sexp_tests)
+ (modules sexp_tests)
+ (libraries stdune dune_lang))
+
 ---
 
 (source_file
@@ -21,6 +26,22 @@ Executable
     (field_name)
     (library_name
       (atom))
+    (library_name
+      (atom))
+    (library_name
+      (atom)))
+  (stanza
+    (stanza_name)
+    (field_name)
+    (module_name
+      (atom))
+    (sexp
+      (list
+        (sexp
+          (atom))
+        (sexp
+          (atom))))
+    (field_name)
     (library_name
       (atom))
     (library_name
@@ -58,6 +79,11 @@ Rule
     (cat %{project_root}/plugin/jbuild_plugin.mli)
     (echo "|jbp}")))))
 
+(rule
+ (targets my.cmxs)
+ (deps plugin%{ext_lib} .dummy.objs/native/dummy__X )
+ (action (run %{ocamlopt} -shared -o %{targets} %{cmxa:plugin} %{cmx:x3})))
+
 ---
 
 (source_file
@@ -79,12 +105,13 @@ Rule
         (sexp
           (atom))))
     (field_name)
-    (sexp
-      (list
-        (sexp
-          (atom))
-        (sexp
-          (atom))))
+    (sexps1
+      (sexp
+        (list
+          (sexp
+            (atom))
+          (sexp
+            (atom)))))
     (field_name)
     (action
       (sexp
@@ -163,7 +190,39 @@ Rule
                   (sexp
                     (atom))
                   (sexp
-                    (quoted_string)))))))))))
+                    (quoted_string))))))))))
+  (stanza
+    (stanza_name)
+    (sexp
+      (list
+        (sexp
+          (atom))
+        (sexp
+          (atom))))
+    (field_name)
+    (sexps1
+      (sexp
+        (atom))
+      (sexp
+        (atom)))
+    (field_name)
+    (action
+      (sexp
+        (list
+          (sexp
+            (atom))
+          (sexp
+            (atom))
+          (sexp
+            (atom))
+          (sexp
+            (atom))
+          (sexp
+            (atom))
+          (sexp
+            (atom))
+          (sexp
+            (atom)))))))
 
 =======
 Library
@@ -294,9 +353,9 @@ enabled_if
               (sexp
                 (quoted_string)))))))))
 
-========
-comments
-========
+=========
+re_export
+=========
 
 (library
   (name        opam_repository)
@@ -317,6 +376,23 @@ comments
     (field_name)
     (library_name
       (atom))
+    (sexp
+      (list
+        (sexp
+          (atom))
+        (sexp
+          (atom))))))
+
+=============
+vendored_dirs
+=============
+
+(vendored_dirs *)
+
+---
+
+(source_file
+  (stanza
     (sexp
       (list
         (sexp

@@ -1,0 +1,139 @@
+========
+comments
+========
+
+; this is a comment
+
+---
+
+(source_file
+  (comment))
+
+=======
+escapes
+=======
+
+(rule (with-stdout-to b (echo "toto\r\n")))
+
+---
+
+(source_file
+  (stanza
+    (stanza_name)
+    (sexp
+      (list
+        (sexp
+          (atom))
+        (sexp
+          (atom))
+        (sexp
+          (list
+            (sexp
+              (atom))
+            (sexp
+              (quoted_string))))))))
+
+========
+newlines
+========
+
+(alias
+ (name runtest)
+ (action (ignore-stdout (echo "\
+If you see this,
+something is wrong
+"))))
+
+---
+
+(source_file
+  (stanza
+    (sexp
+      (list
+        (sexp
+          (atom))
+        (sexp
+          (list
+            (sexp
+              (atom))
+            (sexp
+              (atom))))
+        (sexp
+          (list
+            (sexp
+              (atom))
+            (sexp
+              (list
+                (sexp
+                  (atom))
+                (sexp
+                  (list
+                    (sexp
+                      (atom))
+                    (sexp
+                      (quoted_string))))))))))))
+
+=================
+multiline strings
+=================
+
+(library
+ (name driver_print_tool)
+ (public_name foo.driver_print_tool)
+ (kind ppx_rewriter)
+ (modules ())
+ (libraries compiler-libs.common)
+ (ppx.driver (main "\| (fun () ->
+                   "\|    Ast_mapper.run_main (fun argv ->
+                   "\|      Printf.eprintf "tool name: %s\nargs:%s\n"
+                   "\|        (Ast_mapper.tool_name ())
+                   "\|        (String.concat " " argv);
+                   "\|      Ast_mapper.default_mapper))
+                   )))
+
+---
+
+(source_file
+  (stanza
+    (stanza_name)
+    (field_name)
+    (module_name
+      (atom))
+    (field_name)
+    (public_name
+      (atom))
+    (sexp
+      (list
+        (sexp
+          (atom))
+        (sexp
+          (atom))))
+    (sexp
+      (list
+        (sexp
+          (atom))
+        (sexp
+          (list))))
+    (field_name)
+    (library_name
+      (atom))
+    (sexp
+      (list
+        (sexp
+          (atom))
+        (sexp
+          (list
+            (sexp
+              (atom))
+            (sexp
+              (multiline_string))
+            (sexp
+              (multiline_string))
+            (sexp
+              (multiline_string))
+            (sexp
+              (multiline_string))
+            (sexp
+              (multiline_string))
+            (sexp
+              (multiline_string))))))))
