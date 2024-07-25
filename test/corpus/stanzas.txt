@@ -12,17 +12,11 @@ Executable
 (source_file
   (stanza
     (stanza_executable
-      (field_executable
-        (field_executable_name
-          (atom)))
-      (field_executable
-        (field_executable_public_name
-          (atom)))
-      (field_executable
-        (field_executable_libraries
-          (atom)
-          (atom)
-          (atom))))))
+      (module_name)
+      (public_name)
+      (library_name)
+      (library_name)
+      (library_name))))
 
 ====
 Rule

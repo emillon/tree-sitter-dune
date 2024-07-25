@@ -13,16 +13,20 @@ module.exports = grammar({
     atom: ($) => /[a-zA-Z_%.:/{}\"|=\\,\-!#]+/,
     list: ($) => seq("(", repeat($.sexp), ")"),
     stanza: ($) => choice($.stanza_executable, $.stanza_rule, $.sexp),
-    stanza_executable: ($) => stanza("executable", $.field_executable),
-    field_executable: ($) =>
+    stanza_executable: ($) => stanza("executable", $._field_executable),
+    _field_executable: ($) =>
       choice(
-        $.field_executable_name,
-        $.field_executable_public_name,
-        $.field_executable_libraries,
+        $._field_executable_name,
+        $._field_executable_public_name,
+        $._field_executable_libraries,
       ),
-    field_executable_name: ($) => field("name", $.atom),
-    field_executable_public_name: ($) => field("public_name", $.atom),
-    field_executable_libraries: ($) => field("libraries", repeat($.atom)),
+    _field_executable_name: ($) => field("name", $.module_name),
+    _field_executable_public_name: ($) => field("public_name", $.public_name),
+    _field_executable_libraries: ($) =>
+      field("libraries", repeat($.library_name)),
+    library_name: ($) => alias($.atom, "library_name"),
+    public_name: ($) => alias($.atom, "public_name"),
+    module_name: ($) => alias($.atom, "module_name"),
     stanza_rule: ($) => stanza("rule", $.field_rule),
     field_rule: ($) =>
       choice(
