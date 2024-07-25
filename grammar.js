@@ -27,7 +27,7 @@ module.exports = grammar({
           choice(/[^\\"]/, seq("\\", choice("n", "\n", "r", '"', "\\"))),
         ),
       ),
-    atom: ($) => /[a-zA-Z0-9_%.:/{}|=\\,\-!#<>*+]+/,
+    atom: ($) => /[^;()"\s]+/,
     list: ($) => seq("(", repeat($.sexp), ")"),
     comment: ($) => token(prec(PREC.COMMENT, /;.*/)),
     stanza: ($) =>
