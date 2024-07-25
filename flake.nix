@@ -14,7 +14,10 @@
       {
         formatter = pkgs.nixpkgs-fmt;
         devShells.default = pkgs.mkShell {
-          nativeBuildInputs = [ pkgs.tree-sitter ];
+          nativeBuildInputs = with pkgs; [
+            nodePackages.prettier
+            tree-sitter
+          ];
         };
         packages.default = pkgs.tree-sitter.buildGrammar {
           generate = true;

@@ -11,31 +11,27 @@ copy#
 ---
 
 (source_file
-  (sexp
-    (list
-      (sexp
-        (atom))
-      (sexp
-        (list
-          (sexp
-            (atom))
-          (sexp
-            (atom))))
-      (sexp
-        (list
-          (sexp
-            (atom))
+  (stanza
+    (stanza_rule
+      (field_rule
+        (sexp
+          (list
+            (sexp
+              (atom))
+            (sexp
+              (atom)))))
+      (field_rule
+        (field_rule_mode
           (sexp
             (atom))))
-      (sexp
-        (list
-          (sexp
-            (atom))
-          (sexp
-            (list
-              (sexp
-                (atom))
-              (sexp
-                (atom))
-              (sexp
-                (atom)))))))))
+      (field_rule
+        (field_rule_action
+          (action
+            (sexp
+              (list
+                (sexp
+                  (atom))
+                (sexp
+                  (atom))
+                (sexp
+                  (atom))))))))))
