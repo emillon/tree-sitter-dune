@@ -64,10 +64,9 @@ Rule
   (stanza
     (stanza_name)
     (field_rule
-      (field_rule_mode
-        (field_name)
-        (sexp
-          (atom))))
+      (field_name)
+      (sexp
+        (atom)))
     (field_rule
       (sexp
         (list
@@ -83,101 +82,96 @@ Rule
           (sexp
             (atom)))))
     (field_rule
-      (field_rule_deps
-        (field_name)
+      (field_name)
+      (sexp
+        (list
+          (sexp
+            (atom))
+          (sexp
+            (atom)))))
+    (field_rule
+      (field_name)
+      (action
         (sexp
           (list
             (sexp
               (atom))
             (sexp
-              (atom))))))
-    (field_rule
-      (field_rule_action
-        (field_name)
-        (action
-          (sexp
-            (list
-              (sexp
-                (atom))
-              (sexp
-                (atom))
-              (sexp
-                (list
-                  (sexp
-                    (atom))
-                  (sexp
-                    (atom))
-                  (sexp
-                    (quoted_string))
-                  (sexp
-                    (list
-                      (sexp
-                        (atom))
-                      (sexp
-                        (atom))
-                      (sexp
-                        (atom))))))))))))
+              (atom))
+            (sexp
+              (list
+                (sexp
+                  (atom))
+                (sexp
+                  (atom))
+                (sexp
+                  (quoted_string))
+                (sexp
+                  (list
+                    (sexp
+                      (atom))
+                    (sexp
+                      (atom))
+                    (sexp
+                      (atom)))))))))))
   (stanza
     (stanza_name)
     (field_rule
-      (field_rule_mode
-        (field_name)
-        (sexp
-          (atom))))
-    (field_rule
-      (field_rule_target
-        (field_name)
+      (field_name)
+      (sexp
         (atom)))
     (field_rule
-      (field_rule_action
-        (field_name)
-        (action
-          (sexp
-            (list
-              (sexp
-                (atom))
-              (sexp
-                (atom))
-              (sexp
-                (list
-                  (sexp
-                    (atom))
-                  (sexp
-                    (list
-                      (sexp
-                        (atom))
-                      (sexp
-                        (quoted_string))))
-                  (sexp
-                    (list
-                      (sexp
-                        (atom))
-                      (sexp
-                        (atom))))
-                  (sexp
-                    (list
-                      (sexp
-                        (atom))
-                      (sexp
-                        (quoted_string))))
-                  (sexp
-                    (list
-                      (sexp
-                        (atom))
-                      (sexp
-                        (quoted_string))))
-                  (sexp
-                    (list
-                      (sexp
-                        (atom))
-                      (sexp
-                        (atom))))
-                  (sexp
-                    (list
-                      (sexp
-                        (atom))
-                      (sexp
-                        (quoted_string)))))))))))))
+      (field_name)
+      (atom))
+    (field_rule
+      (field_name)
+      (action
+        (sexp
+          (list
+            (sexp
+              (atom))
+            (sexp
+              (atom))
+            (sexp
+              (list
+                (sexp
+                  (atom))
+                (sexp
+                  (list
+                    (sexp
+                      (atom))
+                    (sexp
+                      (quoted_string))))
+                (sexp
+                  (list
+                    (sexp
+                      (atom))
+                    (sexp
+                      (atom))))
+                (sexp
+                  (list
+                    (sexp
+                      (atom))
+                    (sexp
+                      (quoted_string))))
+                (sexp
+                  (list
+                    (sexp
+                      (atom))
+                    (sexp
+                      (quoted_string))))
+                (sexp
+                  (list
+                    (sexp
+                      (atom))
+                    (sexp
+                      (atom))))
+                (sexp
+                  (list
+                    (sexp
+                      (atom))
+                    (sexp
+                      (quoted_string))))))))))))
 
 =======
 Library

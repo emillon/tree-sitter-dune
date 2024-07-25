@@ -21,19 +21,17 @@ copy#
           (sexp
             (atom)))))
     (field_rule
-      (field_rule_mode
-        (field_name)
-        (sexp
-          (atom))))
+      (field_name)
+      (sexp
+        (atom)))
     (field_rule
-      (field_rule_action
-        (field_name)
-        (action
-          (sexp
-            (list
-              (sexp
-                (atom))
-              (sexp
-                (atom))
-              (sexp
-                (atom)))))))))
+      (field_name)
+      (action
+        (sexp
+          (list
+            (sexp
+              (atom))
+            (sexp
+              (atom))
+            (sexp
+              (atom))))))))

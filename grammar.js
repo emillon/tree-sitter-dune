@@ -34,16 +34,12 @@ module.exports = grammar({
     field_name: ($) => $._atom_or_qs,
     field_rule: ($) =>
       choice(
-        $.field_rule_mode,
-        $.field_rule_target,
-        $.field_rule_deps,
-        $.field_rule_action,
+        dune_field($, "mode", $.sexp),
+        dune_field($, "target", $._atom_or_qs),
+        dune_field($, "deps", $.sexp),
+        dune_field($, "action", $.action),
         $.sexp,
       ),
-    field_rule_mode: ($) => dune_field($, "mode", $.sexp),
-    field_rule_target: ($) => dune_field($, "target", $._atom_or_qs),
-    field_rule_deps: ($) => dune_field($, "deps", $.sexp),
-    field_rule_action: ($) => dune_field($, "action", $.action),
     action: ($) => $.sexp,
     _stanza_library: ($) =>
       dune_stanza(
