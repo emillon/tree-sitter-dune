@@ -18,7 +18,8 @@ module.exports = grammar({
       choice(/[a-z]/, /[A-Z]/, /[,!%{}_=]/, "|", "/", ".", "\\n", " "),
     atom: ($) => /[a-zA-Z_%.:/{}|=\\,\-!#]+/,
     list: ($) => seq("(", repeat($.sexp), ")"),
-    stanza: ($) => choice($._stanza_executable, $._stanza_rule, $.sexp),
+    stanza: ($) =>
+      choice($._stanza_executable, $._stanza_rule, $._stanza_library, $.sexp),
     _stanza_executable: ($) =>
       dune_stanza($, "executable", $._field_executable),
     _field_executable: ($) =>
@@ -50,5 +51,19 @@ module.exports = grammar({
     field_rule_deps: ($) => dune_field($, "deps", $.sexp),
     field_rule_action: ($) => dune_field($, "action", $.action),
     action: ($) => $.sexp,
+    _stanza_library: ($) =>
+      dune_stanza(
+        $,
+        "library",
+        choice(
+          $._field_library_name,
+          $._field_library_libraries,
+          dune_field($, "synopsis", $._atom_or_qs),
+          dune_field($, "instrumentation", $.sexp),
+        ),
+      ),
+    _field_library_name: ($) => dune_field($, "name", $.module_name),
+    _field_library_libraries: ($) =>
+      dune_field($, "libraries", repeat($.library_name)),
   },
 });

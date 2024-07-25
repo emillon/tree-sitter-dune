@@ -194,39 +194,23 @@ Library
 
 (source_file
   (stanza
+    (stanza_name)
+    (field_name)
+    (module_name
+      (atom))
+    (field_name)
+    (library_name
+      (atom))
+    (library_name
+      (atom))
+    (library_name
+      (atom))
+    (field_name)
+    (quoted_string)
+    (field_name)
     (sexp
       (list
         (sexp
           (atom))
         (sexp
-          (list
-            (sexp
-              (atom))
-            (sexp
-              (atom))))
-        (sexp
-          (list
-            (sexp
-              (atom))
-            (sexp
-              (atom))
-            (sexp
-              (atom))
-            (sexp
-              (atom))))
-        (sexp
-          (list
-            (sexp
-              (atom))
-            (sexp
-              (quoted_string))))
-        (sexp
-          (list
-            (sexp
-              (atom))
-            (sexp
-              (list
-                (sexp
-                  (atom))
-                (sexp
-                  (atom))))))))))
+          (atom))))))
