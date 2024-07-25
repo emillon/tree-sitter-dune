@@ -35,12 +35,9 @@ Executable
     (field_name)
     (module_name
       (atom))
-    (sexp
-      (list
-        (sexp
-          (atom))
-        (sexp
-          (atom))))
+    (field_name)
+    (module_name
+      (atom))
     (field_name)
     (library_name
       (atom))
@@ -251,12 +248,9 @@ library
       (atom))
     (library_name
       (atom))
-    (sexp
-      (list
-        (sexp
-          (atom))
-        (sexp
-          (atom))))
+    (field_name)
+    (module_name
+      (atom))
     (field_name)
     (quoted_string)
     (field_name)
@@ -422,14 +416,11 @@ select
     (field_name)
     (module_name
       (atom))
-    (sexp
-      (list
-        (sexp
-          (atom))
-        (sexp
-          (atom))
-        (sexp
-          (atom))))
+    (field_name)
+    (module_name
+      (atom))
+    (module_name
+      (atom))
     (field_name)
     (field_name)
     (sexps1

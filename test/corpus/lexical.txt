@@ -128,12 +128,7 @@ multiline strings
           (atom))
         (sexp
           (atom))))
-    (sexp
-      (list
-        (sexp
-          (atom))
-        (sexp
-          (list))))
+    (field_name)
     (field_name)
     (library_name
       (atom))

@@ -6,6 +6,9 @@ const dune_stanza = ($, name, field_parser) =>
 const dune_field = ($, name, value) =>
   seq("(", alias(name, $.field_name), value, ")");
 
+const dune_osl = (element, self) =>
+  choice(repeat1(element), seq("(", optional(self), ")"));
+
 const PREC = { COMMENT: 0, STRING: 1 };
 
 module.exports = grammar({
@@ -39,7 +42,9 @@ module.exports = grammar({
         dune_field($, "name", $.module_name),
         dune_field($, "public_name", $.public_name),
         dune_field($, "libraries", repeat($._lib_dep)),
+        dune_field($, "modules", $._modules_osl),
       ),
+    _modules_osl: ($) => dune_osl($.module_name, $._modules_osl),
     _lib_dep: ($) =>
       choice(
         $.library_name,
