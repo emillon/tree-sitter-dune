@@ -19,3 +19,4 @@ jobs:
       - uses: actions/checkout@v4
       - uses: cachix/install-nix-action@v27
       - run: nix build
+      - run: nix develop -c sh -c 'tree-sitter generate --no-bindings && tree-sitter test'
