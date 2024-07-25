@@ -63,115 +63,107 @@ Rule
 (source_file
   (stanza
     (stanza_name)
-    (field_rule
-      (field_name)
-      (sexp
-        (atom)))
-    (field_rule
-      (sexp
-        (list
-          (sexp
-            (atom))
-          (sexp
-            (atom)))))
-    (field_rule
-      (sexp
-        (list
-          (sexp
-            (atom))
-          (sexp
-            (atom)))))
-    (field_rule
-      (field_name)
-      (sexp
-        (list
-          (sexp
-            (atom))
-          (sexp
-            (atom)))))
-    (field_rule
-      (field_name)
-      (action
+    (field_name)
+    (sexp
+      (atom))
+    (sexp
+      (list
         (sexp
-          (list
-            (sexp
-              (atom))
-            (sexp
-              (atom))
-            (sexp
-              (list
-                (sexp
-                  (atom))
-                (sexp
-                  (atom))
-                (sexp
-                  (quoted_string))
-                (sexp
-                  (list
-                    (sexp
-                      (atom))
-                    (sexp
-                      (atom))
-                    (sexp
-                      (atom)))))))))))
+          (atom))
+        (sexp
+          (atom))))
+    (sexp
+      (list
+        (sexp
+          (atom))
+        (sexp
+          (atom))))
+    (field_name)
+    (sexp
+      (list
+        (sexp
+          (atom))
+        (sexp
+          (atom))))
+    (field_name)
+    (action
+      (sexp
+        (list
+          (sexp
+            (atom))
+          (sexp
+            (atom))
+          (sexp
+            (list
+              (sexp
+                (atom))
+              (sexp
+                (atom))
+              (sexp
+                (quoted_string))
+              (sexp
+                (list
+                  (sexp
+                    (atom))
+                  (sexp
+                    (atom))
+                  (sexp
+                    (atom))))))))))
   (stanza
     (stanza_name)
-    (field_rule
-      (field_name)
-      (sexp
-        (atom)))
-    (field_rule
-      (field_name)
+    (field_name)
+    (sexp
       (atom))
-    (field_rule
-      (field_name)
-      (action
-        (sexp
-          (list
-            (sexp
-              (atom))
-            (sexp
-              (atom))
-            (sexp
-              (list
-                (sexp
-                  (atom))
-                (sexp
-                  (list
-                    (sexp
-                      (atom))
-                    (sexp
-                      (quoted_string))))
-                (sexp
-                  (list
-                    (sexp
-                      (atom))
-                    (sexp
-                      (atom))))
-                (sexp
-                  (list
-                    (sexp
-                      (atom))
-                    (sexp
-                      (quoted_string))))
-                (sexp
-                  (list
-                    (sexp
-                      (atom))
-                    (sexp
-                      (quoted_string))))
-                (sexp
-                  (list
-                    (sexp
-                      (atom))
-                    (sexp
-                      (atom))))
-                (sexp
-                  (list
-                    (sexp
-                      (atom))
-                    (sexp
-                      (quoted_string))))))))))))
+    (field_name)
+    (atom)
+    (field_name)
+    (action
+      (sexp
+        (list
+          (sexp
+            (atom))
+          (sexp
+            (atom))
+          (sexp
+            (list
+              (sexp
+                (atom))
+              (sexp
+                (list
+                  (sexp
+                    (atom))
+                  (sexp
+                    (quoted_string))))
+              (sexp
+                (list
+                  (sexp
+                    (atom))
+                  (sexp
+                    (atom))))
+              (sexp
+                (list
+                  (sexp
+                    (atom))
+                  (sexp
+                    (quoted_string))))
+              (sexp
+                (list
+                  (sexp
+                    (atom))
+                  (sexp
+                    (quoted_string))))
+              (sexp
+                (list
+                  (sexp
+                    (atom))
+                  (sexp
+                    (atom))))
+              (sexp
+                (list
+                  (sexp
+                    (atom))
+                  (sexp
+                    (quoted_string)))))))))))
 
 =======
 Library
@@ -180,6 +172,7 @@ Library
 (library
  (name dune_rules)
  (libraries stdune fs unix)
+ (modules sha1)
  (synopsis "Internal Dune library, do not use!")
  (instrumentation
   (backend bisect_ppx)))
@@ -199,9 +192,131 @@ Library
       (atom))
     (library_name
       (atom))
+    (sexp
+      (list
+        (sexp
+          (atom))
+        (sexp
+          (atom))))
     (field_name)
     (quoted_string)
     (field_name)
+    (sexp
+      (list
+        (sexp
+          (atom))
+        (sexp
+          (atom))))))
+
+==========
+enabled_if
+==========
+
+(rule
+ (target flags.sexp)
+ (enabled_if
+  (= %{os_type} "Win32"))
+ (action
+  (with-stdout-to
+   %{target}
+   (echo "(-DUNICODE -D_UNICODE)"))))
+
+(rule
+ (target flags.sexp)
+ (enabled_if
+  (<> %{os_type} "Win32"))
+ (action
+  (with-stdout-to
+   %{target}
+   (echo "()"))))
+
+---
+
+(source_file
+  (stanza
+    (stanza_name)
+    (field_name)
+    (atom)
+    (sexp
+      (list
+        (sexp
+          (atom))
+        (sexp
+          (list
+            (sexp
+              (atom))
+            (sexp
+              (atom))
+            (sexp
+              (quoted_string))))))
+    (field_name)
+    (action
+      (sexp
+        (list
+          (sexp
+            (atom))
+          (sexp
+            (atom))
+          (sexp
+            (list
+              (sexp
+                (atom))
+              (sexp
+                (quoted_string))))))))
+  (stanza
+    (stanza_name)
+    (field_name)
+    (atom)
+    (sexp
+      (list
+        (sexp
+          (atom))
+        (sexp
+          (list
+            (sexp
+              (atom))
+            (sexp
+              (atom))
+            (sexp
+              (quoted_string))))))
+    (field_name)
+    (action
+      (sexp
+        (list
+          (sexp
+            (atom))
+          (sexp
+            (atom))
+          (sexp
+            (list
+              (sexp
+                (atom))
+              (sexp
+                (quoted_string)))))))))
+
+========
+comments
+========
+
+(library
+  (name        opam_repository)
+  (libraries   unix (re_export opam_format))
+  (wrapped     false))
+
+---
+
+(source_file
+  (stanza
+    (stanza_name)
+    (field_name)
+    (module_name
+      (atom))
+    (field_name)
+    (library_name
+      (atom))
+    (field_name)
+    (library_name
+      (atom))
     (sexp
       (list
         (sexp
