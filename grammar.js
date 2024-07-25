@@ -20,19 +20,13 @@ module.exports = grammar({
     list: ($) => seq("(", repeat($.sexp), ")"),
     stanza: ($) =>
       choice($._stanza_executable, $._stanza_rule, $._stanza_library, $.sexp),
-    _stanza_executable: ($) =>
-      dune_stanza($, "executable", $._field_executable),
-    _field_executable: ($) =>
+    _stanza_executable: ($) => dune_stanza($, "executable", $._field_buildable),
+    _field_buildable: ($) =>
       choice(
-        $._field_executable_name,
-        $._field_executable_public_name,
-        $._field_executable_libraries,
+        dune_field($, "name", $.module_name),
+        dune_field($, "public_name", $.public_name),
+        dune_field($, "libraries", repeat($.library_name)),
       ),
-    _field_executable_name: ($) => dune_field($, "name", $.module_name),
-    _field_executable_public_name: ($) =>
-      dune_field($, "public_name", $.public_name),
-    _field_executable_libraries: ($) =>
-      dune_field($, "libraries", repeat($.library_name)),
     library_name: ($) => alias($._atom_or_qs, "library_name"),
     public_name: ($) => alias($._atom_or_qs, "public_name"),
     module_name: ($) => alias($._atom_or_qs, "module_name"),
@@ -56,14 +50,10 @@ module.exports = grammar({
         $,
         "library",
         choice(
-          $._field_library_name,
-          $._field_library_libraries,
+          $._field_buildable,
           dune_field($, "synopsis", $._atom_or_qs),
           dune_field($, "instrumentation", $.sexp),
         ),
       ),
-    _field_library_name: ($) => dune_field($, "name", $.module_name),
-    _field_library_libraries: ($) =>
-      dune_field($, "libraries", repeat($.library_name)),
   },
 });
