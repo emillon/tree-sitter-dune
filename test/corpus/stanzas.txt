@@ -11,12 +11,15 @@ Executable
 
 (source_file
   (stanza
-    (stanza_executable
-      (module_name)
-      (public_name)
-      (library_name)
-      (library_name)
-      (library_name))))
+    (stanza_name)
+    (field_name)
+    (module_name)
+    (field_name)
+    (public_name)
+    (field_name)
+    (library_name)
+    (library_name)
+    (library_name)))
 
 ====
 Rule
@@ -54,128 +57,134 @@ Rule
 
 (source_file
   (stanza
-    (stanza_rule
-      (field_rule
-        (field_rule_mode
+    (stanza_name)
+    (field_rule
+      (field_rule_mode
+        (field_name)
+        (sexp
+          (atom))))
+    (field_rule
+      (sexp
+        (list
           (sexp
-            (atom))))
-      (field_rule
+            (atom))
+          (sexp
+            (atom)))))
+    (field_rule
+      (sexp
+        (list
+          (sexp
+            (atom))
+          (sexp
+            (atom)))))
+    (field_rule
+      (field_rule_deps
+        (field_name)
         (sexp
           (list
             (sexp
               (atom))
             (sexp
-              (atom)))))
-      (field_rule
-        (sexp
-          (list
-            (sexp
-              (atom))
-            (sexp
-              (atom)))))
-      (field_rule
-        (field_rule_deps
+              (atom))))))
+    (field_rule
+      (field_rule_action
+        (field_name)
+        (action
           (sexp
             (list
               (sexp
                 (atom))
               (sexp
-                (atom))))))
-      (field_rule
-        (field_rule_action
-          (action
-            (sexp
-              (list
-                (sexp
-                  (atom))
-                (sexp
-                  (atom))
-                (sexp
-                  (list
-                    (sexp
-                      (atom))
-                    (sexp
-                      (atom))
-                    (sexp
-                      (atom))
-                    (sexp
-                      (list
-                        (sexp
-                          (atom))
-                        (sexp
-                          (atom))
-                        (sexp
-                          (atom)))))))))))))
+                (atom))
+              (sexp
+                (list
+                  (sexp
+                    (atom))
+                  (sexp
+                    (atom))
+                  (sexp
+                    (atom))
+                  (sexp
+                    (list
+                      (sexp
+                        (atom))
+                      (sexp
+                        (atom))
+                      (sexp
+                        (atom))))))))))))
   (stanza
-    (stanza_rule
-      (field_rule
-        (field_rule_mode
+    (stanza_name)
+    (field_rule
+      (field_rule_mode
+        (field_name)
+        (sexp
+          (atom))))
+    (field_rule
+      (field_rule_target
+        (field_name)
+        (atom)))
+    (field_rule
+      (field_rule_action
+        (field_name)
+        (action
           (sexp
-            (atom))))
-      (field_rule
-        (field_rule_target
-          (atom)))
-      (field_rule
-        (field_rule_action
-          (action
-            (sexp
-              (list
-                (sexp
-                  (atom))
-                (sexp
-                  (atom))
-                (sexp
-                  (list
-                    (sexp
-                      (atom))
-                    (sexp
-                      (list
-                        (sexp
-                          (atom))
-                        (sexp
-                          (atom))
-                        (sexp
-                          (atom))
-                        (sexp
-                          (atom))
-                        (sexp
-                          (atom))))
-                    (sexp
-                      (list
-                        (sexp
-                          (atom))
-                        (sexp
-                          (atom))))
-                    (sexp
-                      (list
-                        (sexp
-                          (atom))
-                        (sexp
-                          (atom))))
-                    (sexp
-                      (list
-                        (sexp
-                          (atom))
-                        (sexp
-                          (atom))
-                        (sexp
-                          (atom))
-                        (sexp
-                          (atom))
-                        (sexp
-                          (atom))))
-                    (sexp
-                      (list
-                        (sexp
-                          (atom))
-                        (sexp
-                          (atom))))
-                    (sexp
-                      (list
-                        (sexp
-                          (atom))
-                        (sexp
-                          (atom))))))))))))))
+            (list
+              (sexp
+                (atom))
+              (sexp
+                (atom))
+              (sexp
+                (list
+                  (sexp
+                    (atom))
+                  (sexp
+                    (list
+                      (sexp
+                        (atom))
+                      (sexp
+                        (atom))
+                      (sexp
+                        (atom))
+                      (sexp
+                        (atom))
+                      (sexp
+                        (atom))))
+                  (sexp
+                    (list
+                      (sexp
+                        (atom))
+                      (sexp
+                        (atom))))
+                  (sexp
+                    (list
+                      (sexp
+                        (atom))
+                      (sexp
+                        (atom))))
+                  (sexp
+                    (list
+                      (sexp
+                        (atom))
+                      (sexp
+                        (atom))
+                      (sexp
+                        (atom))
+                      (sexp
+                        (atom))
+                      (sexp
+                        (atom))))
+                  (sexp
+                    (list
+                      (sexp
+                        (atom))
+                      (sexp
+                        (atom))))
+                  (sexp
+                    (list
+                      (sexp
+                        (atom))
+                      (sexp
+                        (atom)))))))))))))
 
 =======
 Library
