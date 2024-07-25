@@ -11,8 +11,12 @@ module.exports = grammar({
 
   rules: {
     source_file: ($) => repeat($.stanza),
-    sexp: ($) => choice($.atom, $.list),
-    atom: ($) => /[a-zA-Z_%.:/{}\"|=\\,\-!#]+/,
+    sexp: ($) => choice($._atom_or_qs, $.list),
+    _atom_or_qs: ($) => choice($.atom, $.quoted_string),
+    quoted_string: ($) => seq('"', repeat($._quoted_string_char), '"'),
+    _quoted_string_char: ($) =>
+      choice(/[a-z]/, /[A-Z]/, /[,!%{}_=]/, "|", "/", ".", "\\n", " "),
+    atom: ($) => /[a-zA-Z_%.:/{}|=\\,\-!#]+/,
     list: ($) => seq("(", repeat($.sexp), ")"),
     stanza: ($) => choice($._stanza_executable, $._stanza_rule, $.sexp),
     _stanza_executable: ($) =>
@@ -28,11 +32,11 @@ module.exports = grammar({
       dune_field($, "public_name", $.public_name),
     _field_executable_libraries: ($) =>
       dune_field($, "libraries", repeat($.library_name)),
-    library_name: ($) => alias($.atom, "library_name"),
-    public_name: ($) => alias($.atom, "public_name"),
-    module_name: ($) => alias($.atom, "module_name"),
+    library_name: ($) => alias($._atom_or_qs, "library_name"),
+    public_name: ($) => alias($._atom_or_qs, "public_name"),
+    module_name: ($) => alias($._atom_or_qs, "module_name"),
     _stanza_rule: ($) => dune_stanza($, "rule", $.field_rule),
-    field_name: ($) => $.atom,
+    field_name: ($) => $._atom_or_qs,
     field_rule: ($) =>
       choice(
         $.field_rule_mode,
@@ -42,7 +46,7 @@ module.exports = grammar({
         $.sexp,
       ),
     field_rule_mode: ($) => dune_field($, "mode", $.sexp),
-    field_rule_target: ($) => dune_field($, "target", $.atom),
+    field_rule_target: ($) => dune_field($, "target", $._atom_or_qs),
     field_rule_deps: ($) => dune_field($, "deps", $.sexp),
     field_rule_action: ($) => dune_field($, "action", $.action),
     action: ($) => $.sexp,

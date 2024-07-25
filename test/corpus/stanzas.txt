@@ -13,13 +13,18 @@ Executable
   (stanza
     (stanza_name)
     (field_name)
-    (module_name)
+    (module_name
+      (atom))
     (field_name)
-    (public_name)
+    (public_name
+      (atom))
     (field_name)
-    (library_name)
-    (library_name)
-    (library_name)))
+    (library_name
+      (atom))
+    (library_name
+      (atom))
+    (library_name
+      (atom))))
 
 ====
 Rule
@@ -103,7 +108,7 @@ Rule
                   (sexp
                     (atom))
                   (sexp
-                    (atom))
+                    (quoted_string))
                   (sexp
                     (list
                       (sexp
@@ -142,13 +147,7 @@ Rule
                       (sexp
                         (atom))
                       (sexp
-                        (atom))
-                      (sexp
-                        (atom))
-                      (sexp
-                        (atom))
-                      (sexp
-                        (atom))))
+                        (quoted_string))))
                   (sexp
                     (list
                       (sexp
@@ -160,19 +159,13 @@ Rule
                       (sexp
                         (atom))
                       (sexp
-                        (atom))))
+                        (quoted_string))))
                   (sexp
                     (list
                       (sexp
                         (atom))
                       (sexp
-                        (atom))
-                      (sexp
-                        (atom))
-                      (sexp
-                        (atom))
-                      (sexp
-                        (atom))))
+                        (quoted_string))))
                   (sexp
                     (list
                       (sexp
@@ -184,7 +177,7 @@ Rule
                       (sexp
                         (atom))
                       (sexp
-                        (atom)))))))))))))
+                        (quoted_string)))))))))))))
 
 =======
 Library
@@ -226,17 +219,7 @@ Library
             (sexp
               (atom))
             (sexp
-              (atom))
-            (sexp
-              (atom))
-            (sexp
-              (atom))
-            (sexp
-              (atom))
-            (sexp
-              (atom))
-            (sexp
-              (atom))))
+              (quoted_string))))
         (sexp
           (list
             (sexp
