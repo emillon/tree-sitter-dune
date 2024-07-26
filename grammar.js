@@ -76,10 +76,12 @@ module.exports = grammar({
           dune_field($, "enabled_if", $.blang),
           dune_field($, "alias", repeat1($.alias_name)),
           dune_field($, "package", $.package_name),
+          dune_field($, "fallback", optional($._bool)),
           $.sexp,
         ),
       ),
     _target: ($) => choice($.file_name, seq("(", "dir", $.file_name, ")")),
+    _bool: ($) => choice("true", "false"),
     blang: ($) =>
       choice($._atom_or_qs, seq("(", $.blang_op, repeat1($.blang), ")")),
     blang_op: ($) => choice("=", "<>", ">", "<=", "or", "and"),

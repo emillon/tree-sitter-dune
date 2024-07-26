@@ -185,12 +185,7 @@ Rule
       (atom)))
   (stanza
     (stanza_name)
-    (sexp
-      (list
-        (sexp
-          (atom))
-        (sexp
-          (atom))))
+    (field_name)
     (field_name)
     (field_name)
     (action
