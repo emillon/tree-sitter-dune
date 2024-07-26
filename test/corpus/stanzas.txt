@@ -112,8 +112,9 @@ Rule
     (alias_name
       (atom))
     (field_name)
-    (file_name
-      (atom))
+    (file_name_target
+      (file_name
+        (atom)))
     (field_name)
     (sexps1
       (sexp
@@ -133,7 +134,9 @@ Rule
         (quoted_string)
         (action
           (action_name)
-          (atom)
+          (file_name_dep
+            (file_name
+              (atom)))
           (atom)))))
   (stanza
     (stanza_name)
@@ -145,8 +148,9 @@ Rule
     (field_name)
     (action
       (action_name)
-      (file_name
-        (atom))
+      (file_name_target
+        (file_name
+          (atom)))
       (action
         (action_name)
         (action
@@ -154,8 +158,9 @@ Rule
           (quoted_string))
         (action
           (action_name)
-          (file_name
-            (atom)))
+          (file_name_dep
+            (file_name
+              (atom))))
         (action
           (action_name)
           (quoted_string))
@@ -164,16 +169,18 @@ Rule
           (quoted_string))
         (action
           (action_name)
-          (file_name
-            (atom)))
+          (file_name_dep
+            (file_name
+              (atom))))
         (action
           (action_name)
           (quoted_string)))))
   (stanza
     (stanza_name)
     (field_name)
-    (file_name
-      (atom))
+    (file_name_target
+      (file_name
+        (atom)))
     (field_name)
     (sexps1
       (sexp
@@ -183,7 +190,9 @@ Rule
     (field_name)
     (action
       (action_name)
-      (atom)
+      (file_name_dep
+        (file_name
+          (atom)))
       (atom)
       (atom)
       (atom)
@@ -196,37 +205,46 @@ Rule
     (field_name)
     (action
       (action_name)
-      (file_name
-        (atom))
+      (file_name_target
+        (file_name
+          (atom)))
       (action
         (action_name)
         (quoted_string))))
   (stanza
     (stanza_name)
     (field_name)
-    (file_name
-      (atom))
+    (file_name_target
+      (file_name
+        (atom)))
     (field_name)
     (action
       (action_name)
       (action
         (action_name)
-        (atom)
+        (file_name_dep
+          (file_name
+            (atom)))
         (atom))
       (action
         (action_name)
-        (atom)
+        (file_name_dep
+          (file_name
+            (atom)))
         (atom)
         (atom))))
   (stanza
     (stanza_name)
     (field_name)
-    (file_name
-      (atom))
+    (file_name_target
+      (file_name
+        (atom)))
     (field_name)
     (action
       (action_name)
-      (atom)
+      (file_name_dep
+        (file_name
+          (atom)))
       (atom)
       (atom))
     (field_name)
@@ -353,8 +371,9 @@ enabled_if
     (field_name)
     (action
       (action_name)
-      (file_name
-        (atom))
+      (file_name_target
+        (file_name
+          (atom)))
       (action
         (action_name)
         (quoted_string))))
@@ -372,8 +391,9 @@ enabled_if
     (field_name)
     (action
       (action_name)
-      (file_name
-        (atom))
+      (file_name_target
+        (file_name
+          (atom)))
       (action
         (action_name)
         (quoted_string))))
@@ -397,8 +417,9 @@ enabled_if
     (field_name)
     (action
       (action_name)
-      (file_name
-        (atom))
+      (file_name_target
+        (file_name
+          (atom)))
       (quoted_string)))
   (stanza
     (stanza_name)
@@ -420,8 +441,9 @@ enabled_if
     (field_name)
     (action
       (action_name)
-      (file_name
-        (atom))
+      (file_name_target
+        (file_name
+          (atom)))
       (quoted_string)))
   (stanza
     (stanza_name)

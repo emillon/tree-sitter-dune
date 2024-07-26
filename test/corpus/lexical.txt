@@ -22,8 +22,9 @@ escapes
     (stanza_name)
     (action
       (action_name)
-      (file_name
-        (atom))
+      (file_name_target
+        (file_name
+          (atom)))
       (action
         (action_name)
         (quoted_string)))))
