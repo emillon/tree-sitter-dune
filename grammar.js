@@ -21,7 +21,8 @@ module.exports = grammar({
   extras: ($) => [$.comment, /\s+/],
 
   rules: {
-    source_file: ($) => repeat($.stanza),
+    source_file: ($) => choice($.ocaml_syntax, repeat($.stanza)),
+    ocaml_syntax: ($) => seq("(* -*- tuareg -*- *)", repeat(/.+/)),
     sexp: ($) => choice($._atom_or_qs, $.list),
     sexps1: ($) => repeat1($.sexp),
     _atom_or_qs: ($) => choice($.atom, $.quoted_string, $.multiline_string),
