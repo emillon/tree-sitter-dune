@@ -1,0 +1,116 @@
+==========
+named deps
+==========
+
+(alias
+ (name runtest)
+ (deps (:foo a b) (:baz foo (alias x)) a b c)
+ (action (echo "foo = %{foo}\nbaz = %{baz}\n")))
+
+----
+
+(source_file
+  (stanza
+    (stanza_name)
+    (field_name)
+    (alias_name)
+    (field_name)
+    (named_variable)
+    (file_name)
+    (file_name)
+    (named_variable)
+    (file_name)
+    (alias_name)
+    (file_name)
+    (file_name)
+    (file_name)
+    (field_name)
+    (action
+      (action_name)
+      (quoted_string))))
+
+=======
+sandbox
+=======
+
+(rule
+ (alias fswatch_win_tests)
+ (deps
+  (sandbox always))
+ (action
+  (run ./fswatch_win_tests.exe)))
+
+---
+
+(source_file
+  (stanza
+    (stanza_name)
+    (field_name)
+    (alias_name)
+    (field_name)
+    (field_name)
+    (action
+      (action_name)
+      (file_name_dep
+        (file_name)))))
+
+=========
+alias_rec
+=========
+
+(alias
+ (name default)
+ (deps (alias_rec all)))
+
+----
+
+(source_file
+  (stanza
+    (stanza_name)
+    (field_name)
+    (alias_name)
+    (field_name)
+    (alias_name)))
+
+=======
+package
+=======
+
+(alias
+ (name package-cycle)
+ (deps (package a) (package b)))
+
+---
+
+(source_file
+  (stanza
+    (stanza_name)
+    (field_name)
+    (alias_name)
+    (field_name)
+    (package_name)
+    (package_name)))
+
+=======
+env_var
+=======
+
+(alias
+ (name with_dep)
+ (deps (env_var X))
+ (action (run ./a.exe))
+)
+
+---
+
+(source_file
+  (stanza
+    (stanza_name)
+    (field_name)
+    (alias_name)
+    (field_name)
+    (field_name)
+    (action
+      (action_name)
+      (file_name_dep
+        (file_name)))))

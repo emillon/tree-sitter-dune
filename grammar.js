@@ -15,6 +15,10 @@ const dune_action = ($, name, value) =>
 
 const PREC = { COMMENT: 0, STRING: 1 };
 
+const atom_regexp = /[^;()"\s]+/;
+
+const seq_regexp = (a, b) => new RegExp(a.source + b.source);
+
 module.exports = grammar({
   name: "dune",
 
@@ -35,7 +39,8 @@ module.exports = grammar({
           choice(/[^\\"]/, seq("\\", choice("n", "\n", "r", '"', "\\"))),
         ),
       ),
-    _atom: ($) => /[^;()"\s]+/,
+    _atom: ($) => atom_regexp,
+    named_variable: ($) => seq_regexp(/:/, atom_regexp),
     _list: ($) => seq("(", repeat($.sexp), ")"),
     comment: ($) => token(prec(PREC.COMMENT, /;.*/)),
     stanza: ($) =>
@@ -66,6 +71,7 @@ module.exports = grammar({
         choice(
           dune_field($, "name", $.alias_name),
           dune_field($, "action", $.action),
+          $._deps_field,
           $.sexp,
         ),
       ),
@@ -112,7 +118,7 @@ module.exports = grammar({
           dune_field($, "mode", $._rule_mode),
           dune_field($, "target", $._atom_or_qs),
           dune_field($, "targets", repeat($._target)),
-          dune_field($, "deps", $.sexps1),
+          $._deps_field,
           dune_field($, "action", $.action),
           dune_field($, "enabled_if", $.blang),
           dune_field($, "alias", repeat1($.alias_name)),
@@ -120,6 +126,19 @@ module.exports = grammar({
           dune_field($, "fallback", optional($._bool)),
           dune_field($, "locks", repeat1($.lock_name)),
         ),
+      ),
+    _deps_field: ($) => dune_field($, "deps", repeat1($._dep)),
+    _dep: ($) =>
+      choice(
+        seq("(", $.named_variable, repeat1($._dep), ")"),
+        seq("(", "universe", ")"),
+        seq("(", "sandbox", $._atom_or_qs, ")"),
+        seq("(", "env_var", $._atom_or_qs, ")"),
+        seq("(", choice("alias", "alias_rec"), $.alias_name, ")"),
+        seq("(", "source_tree", $.file_name, ")"),
+        seq("(", "package", $.package_name, ")"),
+        seq("(", "glob_files", repeat1($._atom_or_qs), ")"),
+        $.file_name,
       ),
     _target: ($) =>
       choice($.file_name_target, seq("(", "dir", $.file_name_target, ")")),

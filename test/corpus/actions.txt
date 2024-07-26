@@ -59,11 +59,8 @@ system
     (stanza_name)
     (field_name)
     (alias_name)
-    (sexp
-      (sexp)
-      (sexp)
-      (sexp
-        (sexp)))
+    (field_name)
+    (file_name)
     (field_name)
     (action
       (action_name)
@@ -90,10 +87,6 @@ bash
     (field_name)
     (alias_name)
     (field_name)
-    (sexps1
-      (sexp
-        (sexp)
-        (sexp)))
     (field_name)
     (action
       (action_name)
@@ -255,10 +248,7 @@ no-infer
     (file_name_target
       (file_name))
     (field_name)
-    (sexps1
-      (sexp
-        (sexp)
-        (sexp)))
+    (file_name)
     (field_name)
     (action
       (action_name)

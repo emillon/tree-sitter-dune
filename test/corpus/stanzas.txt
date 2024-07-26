@@ -121,10 +121,8 @@ Rule
     (file_name_target
       (file_name))
     (field_name)
-    (sexps1
-      (sexp
-        (sexp)
-        (sexp)))
+    (named_variable)
+    (file_name)
     (field_name)
     (action
       (action_name)
@@ -173,9 +171,8 @@ Rule
     (file_name_target
       (file_name))
     (field_name)
-    (sexps1
-      (sexp)
-      (sexp))
+    (file_name)
+    (file_name)
     (field_name)
     (action
       (action_name)
