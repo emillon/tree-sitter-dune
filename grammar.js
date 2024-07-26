@@ -10,8 +10,8 @@ const dune_field = ($, name, value) =>
 const dune_osl = (element, self) =>
   choice(repeat1(element), seq("(", optional(self), ")"));
 
-const dune_action = ($, name) =>
-  seq("(", alias(name, $.action_name), repeat($.sexp), ")");
+const dune_action = ($, name, value) =>
+  seq("(", alias(name, $.action_name), value, ")");
 
 const PREC = { COMMENT: 0, STRING: 1 };
 
@@ -58,6 +58,8 @@ module.exports = grammar({
     library_name: ($) => alias($._atom_or_qs, "library_name"),
     public_name: ($) => alias($._atom_or_qs, "public_name"),
     module_name: ($) => alias($._atom_or_qs, "module_name"),
+    file_name: ($) => alias($._atom_or_qs, "file_name"),
+    shell_command: ($) => alias($._atom_or_qs, "shell_command"),
     _stanza_rule: ($) =>
       dune_stanza(
         $,
@@ -73,20 +75,24 @@ module.exports = grammar({
     field_name: ($) => $._atom_or_qs,
     action: ($) =>
       choice(
-        dune_action($, "bash"),
-        dune_action($, "cat"),
-        dune_action($, "chdir"),
-        dune_action($, "copy"),
-        dune_action($, "copy#"),
-        dune_action($, "diff"),
-        dune_action($, "echo"),
-        dune_action($, "no-infer"),
-        dune_action($, "progn"),
-        dune_action($, "run"),
-        dune_action($, "system"),
-        dune_action($, "with-outputs-to"),
-        dune_action($, "with-stdout-to"),
-        dune_action($, "write-file"),
+        dune_action($, "bash", $.shell_command),
+        dune_action($, "cat", $.file_name),
+        dune_action($, "chdir", seq($.file_name, $.action)),
+        dune_action($, "copy", seq($.file_name, $.file_name)),
+        dune_action($, "copy#", seq($.file_name, $.file_name)),
+        dune_action($, "diff", seq($.file_name, $.file_name)),
+        dune_action($, "diff?", seq($.file_name, $.file_name)),
+        dune_action($, "echo", $._atom_or_qs),
+        dune_action($, "no-infer", $.action),
+        dune_action($, "pipe-outputs", repeat1($.action)),
+        dune_action($, "progn", repeat($.action)),
+        dune_action($, "run", repeat1($._atom_or_qs)),
+        dune_action($, "setenv", seq($._atom_or_qs, $._atom_or_qs, $.action)),
+        dune_action($, "system", $.shell_command),
+        dune_action($, "with-outputs-to", seq($.file_name, $.action)),
+        dune_action($, "with-stderr-to", seq($.file_name, $.action)),
+        dune_action($, "with-stdout-to", seq($.file_name, $.action)),
+        dune_action($, "write-file", seq($.file_name, $._atom_or_qs)),
       ),
     _stanza_library: ($) =>
       dune_stanza(

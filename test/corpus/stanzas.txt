@@ -112,24 +112,16 @@ Rule
     (field_name)
     (action
       (action_name)
-      (sexp
+      (file_name
         (atom))
-      (sexp
-        (list
-          (sexp
-            (atom))
-          (sexp
-            (atom))
-          (sexp
-            (quoted_string))
-          (sexp
-            (list
-              (sexp
-                (atom))
-              (sexp
-                (atom))
-              (sexp
-                (atom))))))))
+      (action
+        (action_name)
+        (atom)
+        (quoted_string)
+        (action
+          (action_name)
+          (atom)
+          (atom)))))
   (stanza
     (stanza_name)
     (field_name)
@@ -140,48 +132,30 @@ Rule
     (field_name)
     (action
       (action_name)
-      (sexp
+      (file_name
         (atom))
-      (sexp
-        (list
-          (sexp
-            (atom))
-          (sexp
-            (list
-              (sexp
-                (atom))
-              (sexp
-                (quoted_string))))
-          (sexp
-            (list
-              (sexp
-                (atom))
-              (sexp
-                (atom))))
-          (sexp
-            (list
-              (sexp
-                (atom))
-              (sexp
-                (quoted_string))))
-          (sexp
-            (list
-              (sexp
-                (atom))
-              (sexp
-                (quoted_string))))
-          (sexp
-            (list
-              (sexp
-                (atom))
-              (sexp
-                (atom))))
-          (sexp
-            (list
-              (sexp
-                (atom))
-              (sexp
-                (quoted_string))))))))
+      (action
+        (action_name)
+        (action
+          (action_name)
+          (quoted_string))
+        (action
+          (action_name)
+          (file_name
+            (atom)))
+        (action
+          (action_name)
+          (quoted_string))
+        (action
+          (action_name)
+          (quoted_string))
+        (action
+          (action_name)
+          (file_name
+            (atom)))
+        (action
+          (action_name)
+          (quoted_string)))))
   (stanza
     (stanza_name)
     (sexp
@@ -199,18 +173,12 @@ Rule
     (field_name)
     (action
       (action_name)
-      (sexp
-        (atom))
-      (sexp
-        (atom))
-      (sexp
-        (atom))
-      (sexp
-        (atom))
-      (sexp
-        (atom))
-      (sexp
-        (atom)))))
+      (atom)
+      (atom)
+      (atom)
+      (atom)
+      (atom)
+      (atom))))
 
 =======
 library
@@ -310,14 +278,11 @@ enabled_if
     (field_name)
     (action
       (action_name)
-      (sexp
+      (file_name
         (atom))
-      (sexp
-        (list
-          (sexp
-            (atom))
-          (sexp
-            (quoted_string))))))
+      (action
+        (action_name)
+        (quoted_string))))
   (stanza
     (stanza_name)
     (field_name)
@@ -337,14 +302,11 @@ enabled_if
     (field_name)
     (action
       (action_name)
-      (sexp
+      (file_name
         (atom))
-      (sexp
-        (list
-          (sexp
-            (atom))
-          (sexp
-            (quoted_string)))))))
+      (action
+        (action_name)
+        (quoted_string)))))
 
 =========
 re_export

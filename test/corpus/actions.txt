@@ -25,9 +25,9 @@ copy#
     (field_name)
     (action
       (action_name)
-      (sexp
+      (file_name
         (atom))
-      (sexp
+      (file_name
         (atom)))))
 
 ======
@@ -53,7 +53,7 @@ system
     (field_name)
     (action
       (action_name)
-      (sexp
+      (shell_command
         (quoted_string)))))
 
 ====
@@ -90,7 +90,7 @@ bash
     (field_name)
     (action
       (action_name)
-      (sexp
+      (shell_command
         (quoted_string)))))
 
 ==============
@@ -150,27 +150,269 @@ progn
     (field_name)
     (action
       (action_name)
-      (sexp
+      (file_name
         (atom))
+      (action
+        (action_name)
+        (file_name
+          (atom))
+        (action
+          (action_name)
+          (action
+            (action_name)
+            (shell_command
+              (quoted_string)))
+          (action
+            (action_name)
+            (shell_command
+              (quoted_string))))))))
+
+==========
+write-file
+==========
+
+(rule
+ (action (write-file b "It should work as well!")))
+
+---
+
+(source_file
+  (stanza
+    (stanza_name)
+    (field_name)
+    (action
+      (action_name)
+      (file_name
+        (atom))
+      (quoted_string))))
+
+====
+copy
+====
+
+(rule
+  (action (copy test_temp.ml test_a.ml))
+  (package a))
+
+---
+
+(source_file
+  (stanza
+    (stanza_name)
+    (field_name)
+    (action
+      (action_name)
+      (file_name
+        (atom))
+      (file_name
+        (atom)))
+    (sexp
+      (list
+        (sexp
+          (atom))
+        (sexp
+          (atom))))))
+
+====
+diff
+====
+
+(rule
+ (alias blah-non-existent)
+ (action (diff x-non-existent x.gen)))
+
+---
+
+(source_file
+  (stanza
+    (stanza_name)
+    (sexp
+      (list
+        (sexp
+          (atom))
+        (sexp
+          (atom))))
+    (field_name)
+    (action
+      (action_name)
+      (file_name
+        (atom))
+      (file_name
+        (atom)))))
+
+========
+no-infer
+========
+
+(rule
+ (targets libexample.a dllexample%{ext_dll})
+ (deps (source_tree vendor))
+ (action
+  (no-infer
+   (progn
+    (copy vendor/libexample.a libexample.a)
+    (copy vendor/libexample%{ext_dll} dllexample%{ext_dll})))))
+
+---
+
+(source_file
+  (stanza
+    (stanza_name)
+    (sexp
+      (list
+        (sexp
+          (atom))
+        (sexp
+          (atom))
+        (sexp
+          (atom))))
+    (field_name)
+    (sexps1
       (sexp
         (list
           (sexp
             (atom))
           (sexp
+            (atom)))))
+    (field_name)
+    (action
+      (action_name)
+      (action
+        (action_name)
+        (action
+          (action_name)
+          (file_name
             (atom))
-          (sexp
-            (list
-              (sexp
-                (atom))
-              (sexp
-                (list
-                  (sexp
-                    (atom))
-                  (sexp
-                    (quoted_string))))
-              (sexp
-                (list
-                  (sexp
-                    (atom))
-                  (sexp
-                    (quoted_string)))))))))))
+          (file_name
+            (atom)))
+        (action
+          (action_name)
+          (file_name
+            (atom))
+          (file_name
+            (atom)))))))
+
+============
+pipe-outputs
+============
+
+(rule
+ (action
+  (with-outputs-to
+   config.expected
+   (progn
+    (pipe-outputs
+     ; We need to scrub ignored config values
+     (run %{bin:coqc} --config)
+     (run sed "/^COQCORELIB=/d")
+     (run sed "/^DOCDIR=/d")
+     (run sed "/^OCAMLFIND=/d")
+     (run sed "/^CAMLFLAGS=/d")
+     (run sed "/^WARN=/d")
+     (run sed "/^HASNATDYNLINK=/d")
+     (run sed "/^COQ_SRC_SUBDIRS=/d"))
+    (run %{bin:coqc} -print-version)
+    (run %{bin:coqc} -print-version)))))
+
+---
+
+(source_file
+  (stanza
+    (stanza_name)
+    (field_name)
+    (action
+      (action_name)
+      (file_name
+        (atom))
+      (action
+        (action_name)
+        (action
+          (action_name)
+          (comment)
+          (action
+            (action_name)
+            (atom)
+            (atom))
+          (action
+            (action_name)
+            (atom)
+            (quoted_string))
+          (action
+            (action_name)
+            (atom)
+            (quoted_string))
+          (action
+            (action_name)
+            (atom)
+            (quoted_string))
+          (action
+            (action_name)
+            (atom)
+            (quoted_string))
+          (action
+            (action_name)
+            (atom)
+            (quoted_string))
+          (action
+            (action_name)
+            (atom)
+            (quoted_string))
+          (action
+            (action_name)
+            (atom)
+            (quoted_string)))
+        (action
+          (action_name)
+          (atom)
+          (atom))
+        (action
+          (action_name)
+          (atom)
+          (atom))))))
+
+=====
+diff?
+=====
+
+(rule
+ (alias runtest)
+ (action
+  (progn
+   (with-stdout-to output.expected (echo "MESSAGE\n"))
+   (with-stdout-to output.actual (run ./print.exe))
+   (diff? output.expected output.actual))))
+
+---
+
+(source_file
+  (stanza
+    (stanza_name)
+    (sexp
+      (list
+        (sexp
+          (atom))
+        (sexp
+          (atom))))
+    (field_name)
+    (action
+      (action_name)
+      (action
+        (action_name)
+        (file_name
+          (atom))
+        (action
+          (action_name)
+          (quoted_string)))
+      (action
+        (action_name)
+        (file_name
+          (atom))
+        (action
+          (action_name)
+          (atom)))
+      (action
+        (action_name)
+        (file_name
+          (atom))
+        (file_name
+          (atom))))))
