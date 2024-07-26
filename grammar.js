@@ -79,7 +79,6 @@ module.exports = grammar({
           dune_field($, "package", $.package_name),
           dune_field($, "fallback", optional($._bool)),
           dune_field($, "locks", repeat1($.lock_name)),
-          $.sexp,
         ),
       ),
     _target: ($) => choice($.file_name, seq("(", "dir", $.file_name, ")")),
