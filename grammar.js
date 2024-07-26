@@ -38,7 +38,34 @@ module.exports = grammar({
     list: ($) => seq("(", repeat($.sexp), ")"),
     comment: ($) => token(prec(PREC.COMMENT, /;.*/)),
     stanza: ($) =>
-      choice($._stanza_executable, $._stanza_rule, $._stanza_library, $.sexp),
+      choice(
+        $._stanza_executable,
+        $._stanza_rule,
+        $._stanza_library,
+        dune_stanza($, "vendored_dirs", $.sexp),
+        dune_stanza($, "alias", $.sexp),
+        dune_stanza($, "ocamllex", $.module_name),
+        dune_stanza($, "ocamlyacc", $.module_name),
+        dune_stanza($, "include_subdirs", $.sexp),
+        dune_stanza($, "test", $.sexp),
+        dune_stanza($, "data_only_dirs", $.file_name),
+        dune_stanza($, "cram", $.sexp),
+        dune_stanza($, "dirs", $.sexp),
+        dune_stanza($, "toplevel", $.sexp),
+        dune_stanza($, "install", $.sexp),
+        dune_stanza($, "documentation", $.sexp),
+        dune_stanza($, "env", $.sexp),
+        $._stanza_subdir,
+        $.sexp,
+      ),
+    _stanza_subdir: ($) =>
+      seq(
+        "(",
+        alias("subdir", $.stanza_name),
+        $.file_name,
+        repeat1($.stanza),
+        ")",
+      ),
     _stanza_executable: ($) =>
       dune_stanza($, "executable", choice($._field_buildable, $.sexp)),
     _field_buildable: ($) =>
@@ -83,7 +110,8 @@ module.exports = grammar({
           dune_field($, "locks", repeat1($.lock_name)),
         ),
       ),
-    _target: ($) => choice($.file_name_target, seq("(", "dir", $.file_name_target, ")")),
+    _target: ($) =>
+      choice($.file_name_target, seq("(", "dir", $.file_name_target, ")")),
     _bool: ($) => choice("true", "false"),
     blang: ($) =>
       choice($._atom_or_qs, seq("(", $.blang_op, repeat1($.blang), ")")),

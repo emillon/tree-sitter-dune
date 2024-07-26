@@ -516,12 +516,9 @@ vendored_dirs
 
 (source_file
   (stanza
+    (stanza_name)
     (sexp
-      (list
-        (sexp
-          (atom))
-        (sexp
-          (atom))))))
+      (atom))))
 
 ======
 select
@@ -571,3 +568,279 @@ select
             (atom))
           (sexp
             (atom)))))))
+
+========
+ocamllex
+========
+
+(ocamllex opamLineLexer opamInterpLexer)
+
+---
+
+(source_file
+  (stanza
+    (stanza_name)
+    (module_name
+      (atom))
+    (module_name
+      (atom))))
+
+=========
+ocamlyacc
+=========
+
+(ocamlyacc opamBaseParser)
+
+---
+
+(source_file
+  (stanza
+    (stanza_name)
+    (module_name
+      (atom))))
+
+===============
+include_subdirs
+===============
+
+(include_subdirs unqualified)
+
+---
+
+(source_file
+  (stanza
+    (stanza_name)
+    (sexp
+      (atom))))
+
+====
+test
+====
+
+(test
+ (name gh637)
+ (package dune-private-libs)
+ (libraries stdune ocaml_config)
+ (deps Makefile.config))
+
+---
+
+(source_file
+  (stanza
+    (stanza_name)
+    (sexp
+      (list
+        (sexp
+          (atom))
+        (sexp
+          (atom))))
+    (sexp
+      (list
+        (sexp
+          (atom))
+        (sexp
+          (atom))))
+    (sexp
+      (list
+        (sexp
+          (atom))
+        (sexp
+          (atom))
+        (sexp
+          (atom))))
+    (sexp
+      (list
+        (sexp
+          (atom))
+        (sexp
+          (atom))))))
+
+==============
+data_only_dirs
+==============
+
+(data_only_dirs foo_dir)
+
+---
+
+(source_file
+  (stanza
+    (stanza_name)
+    (file_name
+      (atom))))
+
+====
+cram
+====
+
+(cram
+ (applies_to multiple-merlin-contexts opam)
+ (deps %{bin:opam}))
+
+---
+
+(source_file
+  (stanza
+    (stanza_name)
+    (sexp
+      (list
+        (sexp
+          (atom))
+        (sexp
+          (atom))
+        (sexp
+          (atom))))
+    (sexp
+      (list
+        (sexp
+          (atom))
+        (sexp
+          (atom))))))
+
+====
+dirs
+====
+
+(dirs sub sub2 sub3)
+
+---
+
+(source_file
+  (stanza
+    (stanza_name)
+    (sexp
+      (atom))
+    (sexp
+      (atom))
+    (sexp
+      (atom))))
+
+========
+toplevel
+========
+
+(toplevel
+ (name tt)
+ (libraries foo))
+
+---
+
+(source_file
+  (stanza
+    (stanza_name)
+    (sexp
+      (list
+        (sexp
+          (atom))
+        (sexp
+          (atom))))
+    (sexp
+      (list
+        (sexp
+          (atom))
+        (sexp
+          (atom))))))
+
+=======
+install
+=======
+
+(install
+ (section etc)
+ (files file.conf))
+
+---
+
+(source_file
+  (stanza
+    (stanza_name)
+    (sexp
+      (list
+        (sexp
+          (atom))
+        (sexp
+          (atom))))
+    (sexp
+      (list
+        (sexp
+          (atom))
+        (sexp
+          (atom))))))
+
+=============
+documentation
+=============
+
+(documentation)
+
+---
+
+(source_file
+  (stanza
+    (stanza_name)))
+
+===
+env
+===
+
+(env (_ (env-vars (ITALY "Biscotti") (FRANCE "Petit Beurre") (AMERICA "Oreo") (ENGLAND "Snickerdoodle"))))
+
+---
+
+(source_file
+  (stanza
+    (stanza_name)
+    (sexp
+      (list
+        (sexp
+          (atom))
+        (sexp
+          (list
+            (sexp
+              (atom))
+            (sexp
+              (list
+                (sexp
+                  (atom))
+                (sexp
+                  (quoted_string))))
+            (sexp
+              (list
+                (sexp
+                  (atom))
+                (sexp
+                  (quoted_string))))
+            (sexp
+              (list
+                (sexp
+                  (atom))
+                (sexp
+                  (quoted_string))))
+            (sexp
+              (list
+                (sexp
+                  (atom))
+                (sexp
+                  (quoted_string))))))))))
+
+======
+subdir
+======
+
+(subdir
+ fake_opam_root/default
+ (dirs :standard .opam-switch))
+
+---
+
+(source_file
+  (stanza
+    (stanza_name)
+    (file_name
+      (atom))
+    (stanza
+      (stanza_name)
+      (sexp
+        (atom))
+      (sexp
+        (atom)))))

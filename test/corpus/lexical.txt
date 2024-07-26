@@ -44,6 +44,13 @@ something is wrong
 
 (source_file
   (stanza
+    (stanza_name)
+    (sexp
+      (list
+        (sexp
+          (atom))
+        (sexp
+          (atom))))
     (sexp
       (list
         (sexp
@@ -53,21 +60,11 @@ something is wrong
             (sexp
               (atom))
             (sexp
-              (atom))))
-        (sexp
-          (list
-            (sexp
-              (atom))
-            (sexp
               (list
                 (sexp
                   (atom))
                 (sexp
-                  (list
-                    (sexp
-                      (atom))
-                    (sexp
-                      (quoted_string))))))))))))
+                  (quoted_string))))))))))
 
 =================
 multiline strings
@@ -150,6 +147,13 @@ multiline strings
               (multiline_string)))))))
   (comment)
   (stanza
+    (stanza_name)
+    (sexp
+      (list
+        (sexp
+          (atom))
+        (sexp
+          (atom))))
     (sexp
       (list
         (sexp
@@ -159,42 +163,32 @@ multiline strings
             (sexp
               (atom))
             (sexp
-              (atom))))
-        (sexp
-          (list
+              (multiline_string))
             (sexp
-              (atom))
+              (multiline_string))
             (sexp
-              (list
-                (sexp
-                  (atom))
-                (sexp
-                  (multiline_string))
-                (sexp
-                  (multiline_string))
-                (sexp
-                  (multiline_string))
-                (sexp
-                  (multiline_string))
-                (sexp
-                  (multiline_string))
-                (sexp
-                  (multiline_string))
-                (sexp
-                  (multiline_string))
-                (sexp
-                  (multiline_string))
-                (sexp
-                  (multiline_string))
-                (sexp
-                  (multiline_string))
-                (sexp
-                  (multiline_string))
-                (sexp
-                  (multiline_string))
-                (sexp
-                  (multiline_string))
-                (sexp
-                  (multiline_string))
-                (sexp
-                  (multiline_string))))))))))
+              (multiline_string))
+            (sexp
+              (multiline_string))
+            (sexp
+              (multiline_string))
+            (sexp
+              (multiline_string))
+            (sexp
+              (multiline_string))
+            (sexp
+              (multiline_string))
+            (sexp
+              (multiline_string))
+            (sexp
+              (multiline_string))
+            (sexp
+              (multiline_string))
+            (sexp
+              (multiline_string))
+            (sexp
+              (multiline_string))
+            (sexp
+              (multiline_string))
+            (sexp
+              (multiline_string))))))))
