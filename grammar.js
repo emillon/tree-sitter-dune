@@ -68,6 +68,7 @@ module.exports = grammar({
         choice(
           dune_field($, "mode", $.sexp),
           dune_field($, "target", $._atom_or_qs),
+          dune_field($, "targets", repeat($._target)),
           dune_field($, "deps", $.sexps1),
           dune_field($, "action", $.action),
           dune_field($, "enabled_if", $.blang),
@@ -75,6 +76,7 @@ module.exports = grammar({
           $.sexp,
         ),
       ),
+    _target: ($) => choice($.file_name, seq("(", "dir", $.file_name, ")")),
     blang: ($) =>
       choice($._atom_or_qs, seq("(", $.blang_op, repeat1($.blang), ")")),
     blang_op: ($) => choice("=", "<>", ">", "<=", "or", "and"),

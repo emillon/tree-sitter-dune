@@ -13,12 +13,9 @@ copy#
 (source_file
   (stanza
     (stanza_name)
-    (sexp
-      (list
-        (sexp
-          (atom))
-        (sexp
-          (atom))))
+    (field_name)
+    (file_name
+      (atom))
     (field_name)
     (sexp
       (atom))
@@ -133,14 +130,11 @@ progn
 (source_file
   (stanza
     (stanza_name)
-    (sexp
-      (list
-        (sexp
-          (atom))
-        (sexp
-          (atom))
-        (sexp
-          (atom))))
+    (field_name)
+    (file_name
+      (atom))
+    (file_name
+      (atom))
     (field_name)
     (action
       (action_name)
@@ -249,14 +243,11 @@ no-infer
 (source_file
   (stanza
     (stanza_name)
-    (sexp
-      (list
-        (sexp
-          (atom))
-        (sexp
-          (atom))
-        (sexp
-          (atom))))
+    (field_name)
+    (file_name
+      (atom))
+    (file_name
+      (atom))
     (field_name)
     (sexps1
       (sexp

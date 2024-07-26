@@ -81,6 +81,19 @@ Rule
  (deps plugin%{ext_lib} .dummy.objs/native/dummy__X )
  (action (run %{ocamlopt} -shared -o %{targets} %{cmxa:plugin} %{cmx:x3})))
 
+(rule
+ (fallback false)
+ (targets)
+ (action (with-stdout-to foo.txt (echo "testing"))))
+
+(rule
+ (targets
+  (dir d))
+ (action
+  (progn
+   (run mkdir d)
+   (run cat > d/foo))))
+
 ---
 
 (source_file
@@ -92,12 +105,9 @@ Rule
     (field_name)
     (alias_name
       (atom))
-    (sexp
-      (list
-        (sexp
-          (atom))
-        (sexp
-          (atom))))
+    (field_name)
+    (file_name
+      (atom))
     (field_name)
     (sexps1
       (sexp
@@ -155,12 +165,9 @@ Rule
           (quoted_string)))))
   (stanza
     (stanza_name)
-    (sexp
-      (list
-        (sexp
-          (atom))
-        (sexp
-          (atom))))
+    (field_name)
+    (file_name
+      (atom))
     (field_name)
     (sexps1
       (sexp
@@ -175,7 +182,41 @@ Rule
       (atom)
       (atom)
       (atom)
-      (atom))))
+      (atom)))
+  (stanza
+    (stanza_name)
+    (sexp
+      (list
+        (sexp
+          (atom))
+        (sexp
+          (atom))))
+    (field_name)
+    (field_name)
+    (action
+      (action_name)
+      (file_name
+        (atom))
+      (action
+        (action_name)
+        (quoted_string))))
+  (stanza
+    (stanza_name)
+    (field_name)
+    (file_name
+      (atom))
+    (field_name)
+    (action
+      (action_name)
+      (action
+        (action_name)
+        (atom)
+        (atom))
+      (action
+        (action_name)
+        (atom)
+        (atom)
+        (atom)))))
 
 =======
 library
