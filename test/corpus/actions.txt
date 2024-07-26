@@ -189,12 +189,9 @@ copy
         (atom))
       (file_name
         (atom)))
-    (sexp
-      (list
-        (sexp
-          (atom))
-        (sexp
-          (atom))))))
+    (field_name)
+    (package_name
+      (atom))))
 
 ====
 diff
