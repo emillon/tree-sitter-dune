@@ -47,6 +47,7 @@ module.exports = grammar({
         dune_field($, "public_name", $.public_name),
         dune_field($, "libraries", repeat($._lib_dep)),
         dune_field($, "modules", optional($._modules_osl)),
+        dune_field($, "enabled_if", $.blang),
       ),
     _modules_osl: ($) => dune_osl($.module_name, $._modules_osl),
     _lib_dep: ($) =>
@@ -69,9 +70,13 @@ module.exports = grammar({
           dune_field($, "target", $._atom_or_qs),
           dune_field($, "deps", $.sexps1),
           dune_field($, "action", $.action),
+          dune_field($, "enabled_if", $.blang),
           $.sexp,
         ),
       ),
+    blang: ($) =>
+      choice($._atom_or_qs, seq("(", $.blang_op, repeat1($.blang), ")")),
+    blang_op: ($) => choice("=", "<>", ">", "<=", "or", "and"),
     field_name: ($) => $._atom_or_qs,
     action: ($) =>
       choice(

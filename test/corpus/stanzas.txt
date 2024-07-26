@@ -256,6 +256,33 @@ enabled_if
    %{target}
    (echo "()"))))
 
+(rule
+(enabled_if
+ (or
+  (<> %{system} macosx)
+  (<> %{architecture} arm64)))
+(action
+ (write-file extra_flags.sexp "()")))
+
+(rule
+ (enabled_if
+  (and
+   (= %{system} macosx)
+   (= %{architecture} arm64)))
+ (action
+  (write-file extra_flags.sexp "(-ccopt -Wl,-no_warn_duplicate_libraries)")))
+
+(library
+ (name futurecaml)
+ (modules futurecaml)
+ (enabled_if (> %{ocaml_version} 500.04.0)))
+
+(library
+ (name lte414caml)
+ (modules lte414caml)
+ (enabled_if
+  (<= %{ocaml_version} %{ocaml_version})))
+
 ---
 
 (source_file
@@ -263,18 +290,13 @@ enabled_if
     (stanza_name)
     (field_name)
     (atom)
-    (sexp
-      (list
-        (sexp
-          (atom))
-        (sexp
-          (list
-            (sexp
-              (atom))
-            (sexp
-              (atom))
-            (sexp
-              (quoted_string))))))
+    (field_name)
+    (blang
+      (blang_op)
+      (blang
+        (atom))
+      (blang
+        (quoted_string)))
     (field_name)
     (action
       (action_name)
@@ -287,18 +309,13 @@ enabled_if
     (stanza_name)
     (field_name)
     (atom)
-    (sexp
-      (list
-        (sexp
-          (atom))
-        (sexp
-          (list
-            (sexp
-              (atom))
-            (sexp
-              (atom))
-            (sexp
-              (quoted_string))))))
+    (field_name)
+    (blang
+      (blang_op)
+      (blang
+        (atom))
+      (blang
+        (quoted_string)))
     (field_name)
     (action
       (action_name)
@@ -306,7 +323,83 @@ enabled_if
         (atom))
       (action
         (action_name)
-        (quoted_string)))))
+        (quoted_string))))
+  (stanza
+    (stanza_name)
+    (field_name)
+    (blang
+      (blang_op)
+      (blang
+        (blang_op)
+        (blang
+          (atom))
+        (blang
+          (atom)))
+      (blang
+        (blang_op)
+        (blang
+          (atom))
+        (blang
+          (atom))))
+    (field_name)
+    (action
+      (action_name)
+      (file_name
+        (atom))
+      (quoted_string)))
+  (stanza
+    (stanza_name)
+    (field_name)
+    (blang
+      (blang_op)
+      (blang
+        (blang_op)
+        (blang
+          (atom))
+        (blang
+          (atom)))
+      (blang
+        (blang_op)
+        (blang
+          (atom))
+        (blang
+          (atom))))
+    (field_name)
+    (action
+      (action_name)
+      (file_name
+        (atom))
+      (quoted_string)))
+  (stanza
+    (stanza_name)
+    (field_name)
+    (module_name
+      (atom))
+    (field_name)
+    (module_name
+      (atom))
+    (field_name)
+    (blang
+      (blang_op)
+      (blang
+        (atom))
+      (blang
+        (atom))))
+  (stanza
+    (stanza_name)
+    (field_name)
+    (module_name
+      (atom))
+    (field_name)
+    (module_name
+      (atom))
+    (field_name)
+    (blang
+      (blang_op)
+      (blang
+        (atom))
+      (blang
+        (atom)))))
 
 =========
 re_export
