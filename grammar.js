@@ -23,9 +23,9 @@ module.exports = grammar({
   rules: {
     source_file: ($) => choice($.ocaml_syntax, repeat($.stanza)),
     ocaml_syntax: ($) => seq("(* -*- tuareg -*- *)", repeat(/.+/)),
-    sexp: ($) => choice($._atom_or_qs, $.list),
+    sexp: ($) => choice($._atom_or_qs, $._list),
     sexps1: ($) => repeat1($.sexp),
-    _atom_or_qs: ($) => choice($.atom, $.quoted_string, $.multiline_string),
+    _atom_or_qs: ($) => choice($._atom, $.quoted_string, $.multiline_string),
     quoted_string: ($) => seq('"', repeat($._quoted_string_char), '"'),
     multiline_string: ($) => /"\\[\|>].*\n/,
     _quoted_string_char: ($) =>
@@ -35,8 +35,8 @@ module.exports = grammar({
           choice(/[^\\"]/, seq("\\", choice("n", "\n", "r", '"', "\\"))),
         ),
       ),
-    atom: ($) => /[^;()"\s]+/,
-    list: ($) => seq("(", repeat($.sexp), ")"),
+    _atom: ($) => /[^;()"\s]+/,
+    _list: ($) => seq("(", repeat($.sexp), ")"),
     comment: ($) => token(prec(PREC.COMMENT, /;.*/)),
     stanza: ($) =>
       choice(
@@ -148,6 +148,16 @@ module.exports = grammar({
           $._field_buildable,
           dune_field($, "synopsis", $._atom_or_qs),
           dune_field($, "instrumentation", $.sexp),
+          dune_field(
+            $,
+            "wrapped",
+            choice(
+              optional($._bool),
+              dune_field($, "transition", $._atom_or_qs),
+            ),
+          ),
+          dune_field($, "kind", $.sexp),
+          dune_field($, "ppx.driver", $.sexps1),
           $.sexp,
         ),
       ),

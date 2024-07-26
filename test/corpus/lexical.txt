@@ -23,8 +23,7 @@ escapes
     (action
       (action_name)
       (file_name_target
-        (file_name
-          (atom)))
+        (file_name))
       (action
         (action_name)
         (quoted_string)))))
@@ -46,25 +45,16 @@ something is wrong
   (stanza
     (stanza_name)
     (sexp
-      (list
-        (sexp
-          (atom))
-        (sexp
-          (atom))))
+      (sexp)
+      (sexp))
     (sexp
-      (list
+      (sexp)
+      (sexp
+        (sexp)
         (sexp
-          (atom))
-        (sexp
-          (list
-            (sexp
-              (atom))
-            (sexp
-              (list
-                (sexp
-                  (atom))
-                (sexp
-                  (quoted_string))))))))))
+          (sexp)
+          (sexp
+            (quoted_string)))))))
 
 =================
 multiline strings
@@ -110,88 +100,70 @@ multiline strings
   (stanza
     (stanza_name)
     (field_name)
-    (module_name
-      (atom))
+    (module_name)
     (field_name)
-    (public_name
-      (atom))
-    (sexp
-      (list
-        (sexp
-          (atom))
-        (sexp
-          (atom))))
+    (public_name)
+    (field_name)
+    (sexp)
     (field_name)
     (field_name)
-    (library_name
-      (atom))
-    (sexp
-      (list
+    (library_name)
+    (field_name)
+    (sexps1
+      (sexp
+        (sexp)
         (sexp
-          (atom))
+          (multiline_string))
         (sexp
-          (list
-            (sexp
-              (atom))
-            (sexp
-              (multiline_string))
-            (sexp
-              (multiline_string))
-            (sexp
-              (multiline_string))
-            (sexp
-              (multiline_string))
-            (sexp
-              (multiline_string))
-            (sexp
-              (multiline_string)))))))
+          (multiline_string))
+        (sexp
+          (multiline_string))
+        (sexp
+          (multiline_string))
+        (sexp
+          (multiline_string))
+        (sexp
+          (multiline_string)))))
   (comment)
   (stanza
     (stanza_name)
     (sexp
-      (list
-        (sexp
-          (atom))
-        (sexp
-          (atom))))
+      (sexp)
+      (sexp))
     (sexp
-      (list
+      (sexp)
+      (sexp
+        (sexp)
         (sexp
-          (atom))
+          (multiline_string))
         (sexp
-          (list
-            (sexp
-              (atom))
-            (sexp
-              (multiline_string))
-            (sexp
-              (multiline_string))
-            (sexp
-              (multiline_string))
-            (sexp
-              (multiline_string))
-            (sexp
-              (multiline_string))
-            (sexp
-              (multiline_string))
-            (sexp
-              (multiline_string))
-            (sexp
-              (multiline_string))
-            (sexp
-              (multiline_string))
-            (sexp
-              (multiline_string))
-            (sexp
-              (multiline_string))
-            (sexp
-              (multiline_string))
-            (sexp
-              (multiline_string))
-            (sexp
-              (multiline_string))
-            (sexp
-              (multiline_string))))))))
+          (multiline_string))
+        (sexp
+          (multiline_string))
+        (sexp
+          (multiline_string))
+        (sexp
+          (multiline_string))
+        (sexp
+          (multiline_string))
+        (sexp
+          (multiline_string))
+        (sexp
+          (multiline_string))
+        (sexp
+          (multiline_string))
+        (sexp
+          (multiline_string))
+        (sexp
+          (multiline_string))
+        (sexp
+          (multiline_string))
+        (sexp
+          (multiline_string))
+        (sexp
+          (multiline_string))
+        (sexp
+          (multiline_string))))))
 
 ============
 ocaml syntax

@@ -15,20 +15,16 @@ copy#
     (stanza_name)
     (field_name)
     (file_name_target
-      (file_name
-        (atom)))
+      (file_name))
     (field_name)
-    (sexp
-      (atom))
+    (sexp)
     (field_name)
     (action
       (action_name)
       (file_name_dep
-        (file_name
-          (atom)))
+        (file_name))
       (file_name_target
-        (file_name
-          (atom))))))
+        (file_name)))))
 
 ======
 system
@@ -45,8 +41,7 @@ system
   (stanza
     (stanza_name)
     (field_name)
-    (alias_name
-      (atom))
+    (alias_name)
     (field_name)
     (action
       (action_name)
@@ -71,16 +66,12 @@ bash
   (stanza
     (stanza_name)
     (field_name)
-    (alias_name
-      (atom))
+    (alias_name)
     (field_name)
     (sexps1
       (sexp
-        (list
-          (sexp
-            (atom))
-          (sexp
-            (atom)))))
+        (sexp)
+        (sexp)))
     (field_name)
     (action
       (action_name)
@@ -106,8 +97,7 @@ with-stdout-to
     (action
       (action_name)
       (file_name_target
-        (file_name
-          (atom)))
+        (file_name))
       (action
         (action_name)
         (quoted_string)))))
@@ -131,22 +121,18 @@ progn
     (stanza_name)
     (field_name)
     (file_name_target
-      (file_name
-        (atom)))
+      (file_name))
     (file_name_target
-      (file_name
-        (atom)))
+      (file_name))
     (field_name)
     (action
       (action_name)
       (file_name_target
-        (file_name
-          (atom)))
+        (file_name))
       (action
         (action_name)
         (file_name_target
-          (file_name
-            (atom)))
+          (file_name))
         (action
           (action_name)
           (action
@@ -174,8 +160,7 @@ write-file
     (action
       (action_name)
       (file_name_target
-        (file_name
-          (atom)))
+        (file_name))
       (quoted_string))))
 
 ====
@@ -195,14 +180,11 @@ copy
     (action
       (action_name)
       (file_name_dep
-        (file_name
-          (atom)))
+        (file_name))
       (file_name_target
-        (file_name
-          (atom))))
+        (file_name)))
     (field_name)
-    (package_name
-      (atom))))
+    (package_name)))
 
 ====
 diff
@@ -218,17 +200,14 @@ diff
   (stanza
     (stanza_name)
     (field_name)
-    (alias_name
-      (atom))
+    (alias_name)
     (field_name)
     (action
       (action_name)
       (file_name_dep
-        (file_name
-          (atom)))
+        (file_name))
       (file_name_dep
-        (file_name
-          (atom))))))
+        (file_name)))))
 
 ========
 no-infer
@@ -250,19 +229,14 @@ no-infer
     (stanza_name)
     (field_name)
     (file_name_target
-      (file_name
-        (atom)))
+      (file_name))
     (file_name_target
-      (file_name
-        (atom)))
+      (file_name))
     (field_name)
     (sexps1
       (sexp
-        (list
-          (sexp
-            (atom))
-          (sexp
-            (atom)))))
+        (sexp)
+        (sexp)))
     (field_name)
     (action
       (action_name)
@@ -271,19 +245,15 @@ no-infer
         (action
           (action_name)
           (file_name_dep
-            (file_name
-              (atom)))
+            (file_name))
           (file_name_target
-            (file_name
-              (atom))))
+            (file_name)))
         (action
           (action_name)
           (file_name_dep
-            (file_name
-              (atom)))
+            (file_name))
           (file_name_target
-            (file_name
-              (atom))))))))
+            (file_name)))))))
 
 ============
 pipe-outputs
@@ -316,8 +286,7 @@ pipe-outputs
     (action
       (action_name)
       (file_name_target
-        (file_name
-          (atom)))
+        (file_name))
       (action
         (action_name)
         (action
@@ -326,63 +295,50 @@ pipe-outputs
           (action
             (action_name)
             (file_name_dep
-              (file_name
-                (atom)))
-            (atom))
+              (file_name)))
           (action
             (action_name)
             (file_name_dep
-              (file_name
-                (atom)))
+              (file_name))
             (quoted_string))
           (action
             (action_name)
             (file_name_dep
-              (file_name
-                (atom)))
+              (file_name))
             (quoted_string))
           (action
             (action_name)
             (file_name_dep
-              (file_name
-                (atom)))
+              (file_name))
             (quoted_string))
           (action
             (action_name)
             (file_name_dep
-              (file_name
-                (atom)))
+              (file_name))
             (quoted_string))
           (action
             (action_name)
             (file_name_dep
-              (file_name
-                (atom)))
+              (file_name))
             (quoted_string))
           (action
             (action_name)
             (file_name_dep
-              (file_name
-                (atom)))
+              (file_name))
             (quoted_string))
           (action
             (action_name)
             (file_name_dep
-              (file_name
-                (atom)))
+              (file_name))
             (quoted_string)))
         (action
           (action_name)
           (file_name_dep
-            (file_name
-              (atom)))
-          (atom))
+            (file_name)))
         (action
           (action_name)
           (file_name_dep
-            (file_name
-              (atom)))
-          (atom))))))
+            (file_name)))))))
 
 =====
 diff?
@@ -402,34 +358,28 @@ diff?
   (stanza
     (stanza_name)
     (field_name)
-    (alias_name
-      (atom))
+    (alias_name)
     (field_name)
     (action
       (action_name)
       (action
         (action_name)
         (file_name_target
-          (file_name
-            (atom)))
+          (file_name))
         (action
           (action_name)
           (quoted_string)))
       (action
         (action_name)
         (file_name_target
-          (file_name
-            (atom)))
+          (file_name))
         (action
           (action_name)
           (file_name_dep
-            (file_name
-              (atom)))))
+            (file_name))))
       (action
         (action_name)
         (file_name_dep
-          (file_name
-            (atom)))
+          (file_name))
         (file_name_dep
-          (file_name
-            (atom)))))))
+          (file_name))))))
