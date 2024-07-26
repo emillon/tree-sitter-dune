@@ -27,7 +27,7 @@ module.exports = grammar({
     sexps1: ($) => repeat1($.sexp),
     _atom_or_qs: ($) => choice($._atom, $.quoted_string, $.multiline_string),
     quoted_string: ($) => seq('"', repeat($._quoted_string_char), '"'),
-    multiline_string: ($) => /"\\[\|>].*\n/,
+    multiline_string: ($) => /("\\[\|>].*\n\s*)+/,
     _quoted_string_char: ($) =>
       token.immediate(
         prec(
@@ -44,7 +44,7 @@ module.exports = grammar({
         $._stanza_rule,
         $._stanza_library,
         dune_stanza($, "vendored_dirs", $.sexp),
-        dune_stanza($, "alias", $.sexp),
+        $._stanza_alias,
         dune_stanza($, "ocamllex", $.module_name),
         dune_stanza($, "ocamlyacc", $.module_name),
         dune_stanza($, "include_subdirs", $.sexp),
@@ -58,6 +58,16 @@ module.exports = grammar({
         dune_stanza($, "env", $.sexp),
         $._stanza_subdir,
         $.sexp,
+      ),
+    _stanza_alias: ($) =>
+      dune_stanza(
+        $,
+        "alias",
+        choice(
+          dune_field($, "name", $.alias_name),
+          dune_field($, "action", $.action),
+          $.sexp,
+        ),
       ),
     _stanza_subdir: ($) =>
       seq(
@@ -135,12 +145,14 @@ module.exports = grammar({
       choice(
         dune_action($, "bash", $.shell_command),
         dune_action($, "cat", $.file_name_dep),
+        dune_action($, "cmp", seq($.file_name_dep, $.file_name_dep)),
         dune_action($, "chdir", seq($.file_name, $.action)),
         dune_action($, "copy", seq($.file_name_dep, $.file_name_target)),
         dune_action($, "copy#", seq($.file_name_dep, $.file_name_target)),
         dune_action($, "diff", seq($.file_name_dep, $.file_name_dep)),
         dune_action($, "diff?", seq($.file_name_dep, $.file_name_dep)),
-        dune_action($, "echo", $._atom_or_qs),
+        dune_action($, "echo", repeat1($._atom_or_qs)),
+        dune_action($, "ignore-stdout", $.action),
         dune_action($, "no-infer", $.action),
         dune_action($, "pipe-outputs", repeat1($.action)),
         dune_action($, "progn", repeat($.action)),

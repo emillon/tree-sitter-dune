@@ -44,17 +44,14 @@ something is wrong
 (source_file
   (stanza
     (stanza_name)
-    (sexp
-      (sexp)
-      (sexp))
-    (sexp
-      (sexp)
-      (sexp
-        (sexp)
-        (sexp
-          (sexp)
-          (sexp
-            (quoted_string)))))))
+    (field_name)
+    (alias_name)
+    (field_name)
+    (action
+      (action_name)
+      (action
+        (action_name)
+        (quoted_string)))))
 
 =================
 multiline strings
@@ -113,57 +110,16 @@ multiline strings
       (sexp
         (sexp)
         (sexp
-          (multiline_string))
-        (sexp
-          (multiline_string))
-        (sexp
-          (multiline_string))
-        (sexp
-          (multiline_string))
-        (sexp
-          (multiline_string))
-        (sexp
           (multiline_string)))))
   (comment)
   (stanza
     (stanza_name)
-    (sexp
-      (sexp)
-      (sexp))
-    (sexp
-      (sexp)
-      (sexp
-        (sexp)
-        (sexp
-          (multiline_string))
-        (sexp
-          (multiline_string))
-        (sexp
-          (multiline_string))
-        (sexp
-          (multiline_string))
-        (sexp
-          (multiline_string))
-        (sexp
-          (multiline_string))
-        (sexp
-          (multiline_string))
-        (sexp
-          (multiline_string))
-        (sexp
-          (multiline_string))
-        (sexp
-          (multiline_string))
-        (sexp
-          (multiline_string))
-        (sexp
-          (multiline_string))
-        (sexp
-          (multiline_string))
-        (sexp
-          (multiline_string))
-        (sexp
-          (multiline_string))))))
+    (field_name)
+    (alias_name)
+    (field_name)
+    (action
+      (action_name)
+      (multiline_string))))
 
 ============
 ocaml syntax
