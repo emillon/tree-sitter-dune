@@ -99,7 +99,7 @@ module.exports = grammar({
         "rule",
         choice(
           $.action,
-          dune_field($, "mode", $.sexp),
+          dune_field($, "mode", $._rule_mode),
           dune_field($, "target", $._atom_or_qs),
           dune_field($, "targets", repeat($._target)),
           dune_field($, "deps", $.sexps1),
@@ -114,6 +114,18 @@ module.exports = grammar({
     _target: ($) =>
       choice($.file_name_target, seq("(", "dir", $.file_name_target, ")")),
     _bool: ($) => choice("true", "false"),
+    _rule_mode: ($) =>
+      choice(
+        "fallback",
+        "promote",
+        dune_field($, "promote", $._rule_mode_promote_field),
+        dune_field($, "promote-into", $.file_name),
+      ),
+    _rule_mode_promote_field: ($) =>
+      choice(
+        dune_field($, "only", $._atom_or_qs),
+        dune_field($, "into", $.file_name),
+      ),
     blang: ($) =>
       choice($._atom_or_qs, seq("(", $.blang_op, repeat1($.blang), ")")),
     blang_op: ($) => choice("=", "<>", ">", "<=", "or", "and"),

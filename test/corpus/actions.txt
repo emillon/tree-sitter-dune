@@ -17,7 +17,6 @@ copy#
     (file_name_target
       (file_name))
     (field_name)
-    (sexp)
     (field_name)
     (action
       (action_name)

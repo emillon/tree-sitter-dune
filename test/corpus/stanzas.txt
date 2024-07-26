@@ -91,13 +91,30 @@ Rule
   (run ./incr.exe y %{targets}))
  (locks m))
 
+(rule
+ (targets promoted)
+ (action (with-stdout-to promoted (echo "Hello, world!")))
+ (mode (promote-into subdir)))
+
+(rule
+ (targets only1 only2)
+ (action
+  (progn
+   (with-stdout-to only1 (echo "0"))
+   (with-stdout-to only2 (echo "0"))))
+ (mode (promote (only *1))))
+
+(rule
+ (target into+ignoring)
+ (mode (promote (into subdir)))
+ (action (with-stdout-to %{target} (echo "hello"))))
+
 ---
 
 (source_file
   (stanza
     (stanza_name)
     (field_name)
-    (sexp)
     (field_name)
     (alias_name)
     (field_name)
@@ -122,7 +139,6 @@ Rule
   (stanza
     (stanza_name)
     (field_name)
-    (sexp)
     (field_name)
     (field_name)
     (action
@@ -204,7 +220,65 @@ Rule
       (file_name_dep
         (file_name)))
     (field_name)
-    (lock_name)))
+    (lock_name))
+  (stanza
+    (stanza_name)
+    (field_name)
+    (file_name_target
+      (file_name))
+    (field_name)
+    (action
+      (action_name)
+      (file_name_target
+        (file_name))
+      (action
+        (action_name)
+        (quoted_string)))
+    (field_name)
+    (field_name)
+    (file_name))
+  (stanza
+    (stanza_name)
+    (field_name)
+    (file_name_target
+      (file_name))
+    (file_name_target
+      (file_name))
+    (field_name)
+    (action
+      (action_name)
+      (action
+        (action_name)
+        (file_name_target
+          (file_name))
+        (action
+          (action_name)
+          (quoted_string)))
+      (action
+        (action_name)
+        (file_name_target
+          (file_name))
+        (action
+          (action_name)
+          (quoted_string))))
+    (field_name)
+    (field_name)
+    (field_name))
+  (stanza
+    (stanza_name)
+    (field_name)
+    (field_name)
+    (field_name)
+    (field_name)
+    (file_name)
+    (field_name)
+    (action
+      (action_name)
+      (file_name_target
+        (file_name))
+      (action
+        (action_name)
+        (quoted_string)))))
 
 =======
 library
