@@ -44,12 +44,9 @@ system
 (source_file
   (stanza
     (stanza_name)
-    (sexp
-      (list
-        (sexp
-          (atom))
-        (sexp
-          (atom))))
+    (field_name)
+    (alias_name
+      (atom))
     (field_name)
     (action
       (action_name)
@@ -73,12 +70,9 @@ bash
 (source_file
   (stanza
     (stanza_name)
-    (sexp
-      (list
-        (sexp
-          (atom))
-        (sexp
-          (atom))))
+    (field_name)
+    (alias_name
+      (atom))
     (field_name)
     (sexps1
       (sexp
@@ -226,12 +220,9 @@ diff
 (source_file
   (stanza
     (stanza_name)
-    (sexp
-      (list
-        (sexp
-          (atom))
-        (sexp
-          (atom))))
+    (field_name)
+    (alias_name
+      (atom))
     (field_name)
     (action
       (action_name)
@@ -387,12 +378,9 @@ diff?
 (source_file
   (stanza
     (stanza_name)
-    (sexp
-      (list
-        (sexp
-          (atom))
-        (sexp
-          (atom))))
+    (field_name)
+    (alias_name
+      (atom))
     (field_name)
     (action
       (action_name)

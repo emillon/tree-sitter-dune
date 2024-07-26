@@ -71,6 +71,7 @@ module.exports = grammar({
           dune_field($, "deps", $.sexps1),
           dune_field($, "action", $.action),
           dune_field($, "enabled_if", $.blang),
+          dune_field($, "alias", repeat1($.alias_name)),
           $.sexp,
         ),
       ),
@@ -78,6 +79,7 @@ module.exports = grammar({
       choice($._atom_or_qs, seq("(", $.blang_op, repeat1($.blang), ")")),
     blang_op: ($) => choice("=", "<>", ">", "<=", "or", "and"),
     field_name: ($) => $._atom_or_qs,
+    alias_name: ($) => $._atom_or_qs,
     action: ($) =>
       choice(
         dune_action($, "bash", $.shell_command),

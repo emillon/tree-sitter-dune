@@ -89,12 +89,9 @@ Rule
     (field_name)
     (sexp
       (atom))
-    (sexp
-      (list
-        (sexp
-          (atom))
-        (sexp
-          (atom))))
+    (field_name)
+    (alias_name
+      (atom))
     (sexp
       (list
         (sexp
