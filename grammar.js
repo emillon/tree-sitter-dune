@@ -66,6 +66,7 @@ module.exports = grammar({
         $,
         "rule",
         choice(
+          $.action,
           dune_field($, "mode", $.sexp),
           dune_field($, "target", $._atom_or_qs),
           dune_field($, "targets", repeat($._target)),

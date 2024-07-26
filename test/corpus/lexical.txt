@@ -20,18 +20,13 @@ escapes
 (source_file
   (stanza
     (stanza_name)
-    (sexp
-      (list
-        (sexp
-          (atom))
-        (sexp
-          (atom))
-        (sexp
-          (list
-            (sexp
-              (atom))
-            (sexp
-              (quoted_string))))))))
+    (action
+      (action_name)
+      (file_name
+        (atom))
+      (action
+        (action_name)
+        (quoted_string)))))
 
 ========
 newlines
