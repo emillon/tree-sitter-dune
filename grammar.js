@@ -1,17 +1,17 @@
 /// <reference types="tree-sitter-cli/dsl" />
 // @ts-check
 
-const dune_stanza = ($, name, field_parser) =>
-  seq("(", alias(name, $.stanza_name), repeat(field_parser), ")");
+const wrap = (...a) => seq("(", ...a, ")");
 
-const dune_field = ($, name, value) =>
-  seq("(", alias(name, $.field_name), value, ")");
+const dune_stanza = ($, name, field_parser) =>
+  wrap(alias(name, $.stanza_name), repeat(field_parser));
+
+const dune_field = ($, name, value) => wrap(alias(name, $.field_name), value);
 
 const dune_osl = (element, self) =>
-  choice(repeat1(element), seq("(", optional(self), ")"));
+  choice(repeat1(element), wrap(optional(self)));
 
-const dune_action = ($, name, value) =>
-  seq("(", alias(name, $.action_name), value, ")");
+const dune_action = ($, name, value) => wrap(alias(name, $.action_name), value);
 
 const PREC = { COMMENT: 0, STRING: 1 };
 
@@ -41,7 +41,7 @@ module.exports = grammar({
       ),
     _atom: ($) => atom_regexp,
     named_variable: ($) => seq_regexp(/:/, atom_regexp),
-    _list: ($) => seq("(", repeat($.sexp), ")"),
+    _list: ($) => wrap(repeat($.sexp)),
     comment: ($) => token(prec(PREC.COMMENT, /;.*/)),
     stanza: ($) =>
       choice(
@@ -76,13 +76,7 @@ module.exports = grammar({
         ),
       ),
     _stanza_subdir: ($) =>
-      seq(
-        "(",
-        alias("subdir", $.stanza_name),
-        $.file_name,
-        repeat1($.stanza),
-        ")",
-      ),
+      wrap(alias("subdir", $.stanza_name), $.file_name, repeat1($.stanza)),
     _stanza_executable: ($) =>
       dune_stanza($, "executable", choice($._field_buildable, $.sexp)),
     _field_buildable: ($) =>
@@ -130,18 +124,17 @@ module.exports = grammar({
     _deps_field: ($) => dune_field($, "deps", repeat1($._dep)),
     _dep: ($) =>
       choice(
-        seq("(", $.named_variable, repeat1($._dep), ")"),
-        seq("(", "universe", ")"),
-        seq("(", "sandbox", $._atom_or_qs, ")"),
-        seq("(", "env_var", $._atom_or_qs, ")"),
-        seq("(", choice("alias", "alias_rec"), $.alias_name, ")"),
-        seq("(", "source_tree", $.file_name, ")"),
-        seq("(", "package", $.package_name, ")"),
-        seq("(", "glob_files", repeat1($._atom_or_qs), ")"),
+        wrap($.named_variable, repeat1($._dep)),
+        wrap("universe"),
+        wrap("sandbox", $._atom_or_qs),
+        wrap("env_var", $._atom_or_qs),
+        wrap(choice("alias", "alias_rec"), $.alias_name),
+        wrap("source_tree", $.file_name),
+        wrap("package", $.package_name),
+        wrap("glob_files", repeat1($._atom_or_qs)),
         $.file_name,
       ),
-    _target: ($) =>
-      choice($.file_name_target, seq("(", "dir", $.file_name_target, ")")),
+    _target: ($) => choice($.file_name_target, wrap("dir", $.file_name_target)),
     _bool: ($) => choice("true", "false"),
     _rule_mode: ($) =>
       choice(
@@ -155,8 +148,7 @@ module.exports = grammar({
         dune_field($, "only", $._atom_or_qs),
         dune_field($, "into", $.file_name),
       ),
-    blang: ($) =>
-      choice($._atom_or_qs, seq("(", $.blang_op, repeat1($.blang), ")")),
+    blang: ($) => choice($._atom_or_qs, wrap($.blang_op, repeat1($.blang))),
     blang_op: ($) => choice("=", "<>", ">", "<=", "or", "and"),
     field_name: ($) => $._atom_or_qs,
     alias_name: ($) => $._atom_or_qs,
