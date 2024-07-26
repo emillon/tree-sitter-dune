@@ -94,6 +94,12 @@ Rule
    (run mkdir d)
    (run cat > d/foo))))
 
+(rule
+ (targets 01.bar)
+ (action
+  (run ./incr.exe y %{targets}))
+ (locks m))
+
 ---
 
 (source_file
@@ -211,7 +217,21 @@ Rule
         (action_name)
         (atom)
         (atom)
-        (atom)))))
+        (atom))))
+  (stanza
+    (stanza_name)
+    (field_name)
+    (file_name
+      (atom))
+    (field_name)
+    (action
+      (action_name)
+      (atom)
+      (atom)
+      (atom))
+    (field_name)
+    (lock_name
+      (atom))))
 
 =======
 library

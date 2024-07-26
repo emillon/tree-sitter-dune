@@ -61,6 +61,7 @@ module.exports = grammar({
     module_name: ($) => alias($._atom_or_qs, "module_name"),
     file_name: ($) => alias($._atom_or_qs, "file_name"),
     package_name: ($) => $._atom_or_qs,
+    lock_name: ($) => $._atom_or_qs,
     shell_command: ($) => alias($._atom_or_qs, "shell_command"),
     _stanza_rule: ($) =>
       dune_stanza(
@@ -77,6 +78,7 @@ module.exports = grammar({
           dune_field($, "alias", repeat1($.alias_name)),
           dune_field($, "package", $.package_name),
           dune_field($, "fallback", optional($._bool)),
+          dune_field($, "locks", repeat1($.lock_name)),
           $.sexp,
         ),
       ),
