@@ -151,7 +151,7 @@ module.exports = grammar({
         dune_field($, "into", $.file_name),
       ),
     blang: ($) => choice($._atom_or_qs, wrap($.blang_op, repeat1($.blang))),
-    blang_op: ($) => choice("=", "<>", ">", "<=", "or", "and"),
+    blang_op: ($) => choice("=", "<>", ">", "<", ">=", "<=", "or", "and"),
     field_name: ($) => $._atom_or_qs,
     alias_name: ($) => $._atom_or_qs,
     action: ($) =>

@@ -844,3 +844,64 @@ ppx.driver
       (sexp
         (sexp)
         (sexp)))))
+
+==============
+enabled_if and
+==============
+
+(rule
+ (alias runtest)
+ (enabled_if
+  (and
+   (>= %{ocaml_version} "4.08.0")
+   (< %{ocaml_version} "4.12.0")))
+ (deps
+  (:test test.ml)
+  (package ppxlib))
+ (action
+  (chdir
+   %{project_root}
+   (progn
+    (run expect-test %{test})
+    (diff? %{test} %{test}.corrected)))))
+
+---
+
+(source_file
+  (stanza
+    (stanza_name)
+    (field_name)
+    (alias_name)
+    (field_name)
+    (blang
+      (blang_op)
+      (blang
+        (blang_op)
+        (blang)
+        (blang
+          (quoted_string)))
+      (blang
+        (blang_op)
+        (blang)
+        (blang
+          (quoted_string))))
+    (field_name)
+    (named_variable)
+    (file_name)
+    (package_name)
+    (field_name)
+    (action
+      (action_name)
+      (file_name)
+      (action
+        (action_name)
+        (action
+          (action_name)
+          (file_name_dep
+            (file_name)))
+        (action
+          (action_name)
+          (file_name_dep
+            (file_name))
+          (file_name_dep
+            (file_name)))))))
