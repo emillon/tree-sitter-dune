@@ -582,6 +582,20 @@ ocamlyacc
     (stanza_name)
     (module_name)))
 
+=================
+ocamlyacc modules
+=================
+
+(ocamlyacc (modules qparse))
+
+---
+
+(source_file
+  (stanza
+    (stanza_name)
+    (field_name)
+    (module_name)))
+
 ===============
 include_subdirs
 ===============

@@ -50,15 +50,8 @@ module.exports = grammar({
         $._stanza_library,
         dune_stanza($, "vendored_dirs", $.sexp),
         $._stanza_alias,
-        dune_stanza(
-          $,
-          "ocamllex",
-          choice(
-            $.module_name,
-            dune_field($, "modules", repeat($.module_name)),
-          ),
-        ),
-        dune_stanza($, "ocamlyacc", $.module_name),
+        dune_stanza($, "ocamllex", $._field_modules_maybe_inline),
+        dune_stanza($, "ocamlyacc", $._field_modules_maybe_inline),
         dune_stanza($, "include_subdirs", $.sexp),
         dune_stanza($, "test", $.sexp),
         dune_stanza($, "data_only_dirs", $.file_name),
@@ -71,6 +64,8 @@ module.exports = grammar({
         $._stanza_subdir,
         $.sexp,
       ),
+    _field_modules_maybe_inline: ($) =>
+      choice($.module_name, dune_field($, "modules", repeat($.module_name))),
     _stanza_alias: ($) =>
       dune_stanza(
         $,
