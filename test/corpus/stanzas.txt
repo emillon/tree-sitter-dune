@@ -554,6 +554,21 @@ ocamllex
     (module_name)
     (module_name)))
 
+================
+ocamllex modules
+================
+
+(ocamllex (modules qtest_bin misclex))
+
+---
+
+(source_file
+  (stanza
+    (stanza_name)
+    (field_name)
+    (module_name)
+    (module_name)))
+
 =========
 ocamlyacc
 =========
