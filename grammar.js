@@ -172,6 +172,11 @@ module.exports = grammar({
         dune_action($, "run", seq($.file_name_dep, repeat($._atom_or_qs))),
         dune_action($, "setenv", seq($._atom_or_qs, $._atom_or_qs, $.action)),
         dune_action($, "system", $.shell_command),
+        dune_action(
+          $,
+          "with-accepted-exit-codes",
+          seq($._atom_or_qs, $.action),
+        ),
         dune_action($, "with-outputs-to", seq($.file_name_target, $.action)),
         dune_action($, "with-stderr-to", seq($.file_name_target, $.action)),
         dune_action($, "with-stdout-to", seq($.file_name_target, $.action)),

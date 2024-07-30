@@ -418,3 +418,46 @@ cmp
         (file_name))
       (file_name_dep
         (file_name)))))
+
+========================
+with-accepted-exit-codes
+========================
+
+(rule
+  (targets output.txt)
+  (deps ./QCheck_ounit_test.exe)
+  (enabled_if (= %{os_type} "Unix"))
+  (action
+    (with-accepted-exit-codes
+      1
+      (with-stdout-to
+        %{targets}
+        (run ./run_ounit.sh -runner=sequential -seed 1234)))))
+
+---
+
+(source_file
+  (stanza
+    (stanza_name)
+    (field_name)
+    (file_name_target
+      (file_name))
+    (field_name)
+    (file_name)
+    (field_name)
+    (blang
+      (blang_op)
+      (blang)
+      (blang
+        (quoted_string)))
+    (field_name)
+    (action
+      (action_name)
+      (action
+        (action_name)
+        (file_name_target
+          (file_name))
+        (action
+          (action_name)
+          (file_name_dep
+            (file_name)))))))
